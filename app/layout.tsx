@@ -26,6 +26,11 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://ritual-therapy.netlify.app",
   },
+  verification: {
+    other: {
+      "naver-site-verification": "76130256a14b2cd26086feb856d7ab7a0e3566ba",
+    },
+  },
   openGraph: {
     title: "리추얼(Ritual) | 서울·경기·인천 24시 안심 방문 힐링 테라피",
     description: "선입금 없는 100% 후불제 안심 예약! 수도권 전지역 평균 25분 내 빠른 방문 프리미엄 바디케어.",
