@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "서비스 안내 | 맞춤 테라피 & 프리미엄 바디케어 - 힐핏(HealFit)",
-  // 네이버 검색 최적 글자 수 (공백 포함 75~80자) 및 안심 케어 CTR 문구
-  description: "서울·경기·인천 힐핏 서비스 안내! 타이 건식, 천연 아로마, 감성 스웨디시, VIP 맞춤 테라피 코스와 100% 안심 후불제 프로그램을 확인하세요.",
+  title: "서비스 안내 | 맞춤 테라피 & 프리미엄 바디케어 - 리추얼(Ritual)",
+  // 네이버 검색 최적 글자 수 및 안심 케어 CTR 문구
+  description: "서울·경기·인천 리추얼 서비스 안내! 타이 건식, 천연 아로마, 감성 스웨디시, VIP 맞춤 테라피 코스와 100% 안심 후불제 프로그램을 확인하세요.",
   keywords: [
-    "힐핏 서비스",
+    "리추얼 서비스",
     "타이마사지 코스",
     "아로마테라피 프로그램",
     "스웨디시 마사지",
@@ -15,13 +15,13 @@ export const metadata: Metadata = {
     "1대1 맞춤 테라피"
   ],
   alternates: {
-    canonical: "https://healfitmassage.netlify.app/services",
+    canonical: "https://ritual-therapy.netlify.app/services",
   },
   openGraph: {
-    title: "서비스 안내 | 힐핏(HealFit) 맞춤 힐링 테라피 코스",
+    title: "서비스 안내 | 리추얼(Ritual) 맞춤 힐링 테라피 코스",
     description: "컨디션과 취향에 맞춘 최상의 힐링 프로그램! 타이, 아로마, 스웨디시 프리미엄 바디케어를 만나보세요.",
-    url: "https://healfitmassage.netlify.app/services",
-    siteName: "힐핏(HealFit)",
+    url: "https://ritual-therapy.netlify.app/services",
+    siteName: "리추얼(Ritual)",
     locale: "ko_KR",
     type: "website",
     images: [
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
         url: "/og-main.png",
         width: 1200,
         height: 630,
-        alt: "힐핏 서비스 안내",
+        alt: "리추얼 서비스 안내",
       },
     ],
   },
@@ -81,7 +81,7 @@ export default function ServicesPage() {
             PREMIUM CARE SERVICE
           </span>
           <h1 className="text-2xl md:text-4xl font-black text-white tracking-tight">
-            힐핏 코스별 서비스 프로그램 안내
+            리추얼 코스별 서비스 프로그램 안내
           </h1>
           <p className="text-xs md:text-sm text-gray-400 max-w-lg mx-auto leading-relaxed">
             고객님의 당일 컨디션과 선호에 맞춰 가장 편안하고 완벽한 피로회복 시간을 선사하는 맞춤 테라피 프로그램입니다.
@@ -181,7 +181,7 @@ export default function ServicesPage() {
             href="/"
             className="inline-flex items-center gap-1 text-xs text-gray-400 hover:text-amber-400 transition-colors"
           >
-            ← 힐핏 메인 홈으로 이동하기
+            ← 리추얼 메인 홈으로 이동하기
           </Link>
         </div>
 

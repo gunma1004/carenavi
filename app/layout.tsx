@@ -3,41 +3,34 @@ import "./globals.css";
 import NavigationHeader from "./NavigationHeader";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://healfitmassage.netlify.app"),
+  metadataBase: new URL("https://ritual-therapy.netlify.app"),
   title: {
     // 🌟 네이버 40자 이내 권장 규격 준수 (32자)
-    default: "힐핏(HealFit) | 서울·경기·인천 24시 출장마사지",
-    template: "%s | 힐핏(HealFit)"
+    default: "리추얼(Ritual) | 서울·경기·인천 24시 방문 힐링 테라피",
+    template: "%s | 리추얼(Ritual)"
   },
-  // 네이버 검색 최적 노출 디스크립션 (75~80자 내외)
-  description: "서울·경기·인천 24시 출장마사지 & 방문 홈케어 전문 힐핏! 선입금 없는 100% 안심 후불제, 타이·아로마·스웨디시 제휴업체 정보 및 실시간 빠른 예약을 확인하세요.",
+  // 네이버 검색 최적 노출 디스크립션 (스팸 키워드 배제 및 클린 구성)
+  description: "서울·경기·인천 24시 방문 힐링 테라피 & 프리미엄 바디케어 전문 리추얼! 100% 안심 후불제, 릴렉스·타이·아로마 제휴업체 정보 및 실시간 빠른 예약을 확인하세요.",
   keywords: [
-    "출장마사지",
-    "출장 마사지",
-    "서울 출장마사지",
-    "경기 출장마사지",
-    "인천 출장마사지",
-    "홈타이",
-    "방문 마사지",
-    "스웨디시",
+    "출장 힐링 마사지",
+    "출장 릴렉스 마사지",
+    "출장 타이 마사지",
+    "서울 방문 테라피",
+    "경기 홈케어",
+    "인천 바디케어",
     "아로마 테라피",
-    "후불제 출장마사지",
-    "힐핏",
-    "HealFit"
+    "후불제 힐링",
+    "리추얼",
+    "Ritual"
   ],
   alternates: {
-    canonical: "https://healfitmassage.netlify.app",
-  },
-  verification: {
-    other: {
-      "naver-site-verification": "199170efdbe214642e81615d6d9e58dce4545143",
-    },
+    canonical: "https://ritual-therapy.netlify.app",
   },
   openGraph: {
-    title: "힐핏(HealFit) | 서울·경기·인천 24시 안심 출장마사지",
-    description: "선입금 없는 100% 후불제 안심 예약! 수도권 전지역 평균 25분 내 빠른 방문 바디케어.",
-    url: "https://healfitmassage.netlify.app",
-    siteName: "힐핏(HealFit)",
+    title: "리추얼(Ritual) | 서울·경기·인천 24시 안심 방문 힐링 테라피",
+    description: "선입금 없는 100% 후불제 안심 예약! 수도권 전지역 평균 25분 내 빠른 방문 프리미엄 바디케어.",
+    url: "https://ritual-therapy.netlify.app",
+    siteName: "리추얼(Ritual)",
     locale: "ko_KR",
     type: "website",
     images: [
@@ -45,7 +38,7 @@ export const metadata: Metadata = {
         url: "/og-main.png",
         width: 1200,
         height: 630,
-        alt: "힐핏 프리미엄 테라피 안내",
+        alt: "리추얼 프리미엄 테라피 안내",
       },
     ],
   },

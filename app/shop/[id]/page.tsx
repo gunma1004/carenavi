@@ -5,6 +5,10 @@ interface PageProps {
   params: Promise<{
     id: string;
   }>;
+  searchParams: Promise<{
+    region?: string;
+    keyword?: string;
+  }>;
 }
 
 const shopData: Record<string, {
@@ -22,29 +26,26 @@ const shopData: Record<string, {
   }[];
   features: string[];
 }> = {
-  // ───────────────────────────────────────────
-  // 1. 한국골든테라피 (0507-1280-3361)
-  // ───────────────────────────────────────────
   "1": {
-    name: "✨ 한국골든테라피",
+    name: "한국골든테라피",
     phone: "0507-1280-3361",
     location: "서울 · 경기 · 인천 전지역 25분 내 신속 방문",
     badge: "VIP 골든 힐링 케어",
     image: "/shop1.jpg",
-    desc: "골든 품격의 감성 릴렉싱! 전문 한국인 관리사와 혼혈 프리미엄 힐러진이 선사하는 맞춤형 바디케어.",
+    desc: "골든 품격의 감성 릴렉싱! 전문 관리사들의 정성스러운 출장 힐링 마사지와 출장 릴렉스 마사지로 일상의 피로를 완벽하게 해소해 드립니다.",
     courses: [
       {
-        category: "👑 한국인 골든 스웨디시",
+        category: "👑 프리미엄 출장 스웨디시 마사지",
         badge: "BEST 시그니처",
-        desc: "최고급 천연 오일과 전문 한국인 테라피스트의 수준 높은 1:1 감성 림프 순환 케어.",
+        desc: "최고급 천연 오일과 전문 테라피스트의 수준 높은 1:1 감성 림프 순환 출장 바디케어.",
         items: [
           { time: "60분", price: "140,000원" },
           { time: "90분", price: "190,000원", recommend: true }
         ]
       },
       {
-        category: "💎 혼혈 프리미엄 코스",
-        desc: "부드러운 압과 섬세한 테크닉으로 전신의 피로를 완벽하게 해소하는 인기 힐링 코스.",
+        category: "💎 맞춤형 출장 릴렉스 테라피",
+        desc: "부드러운 압과 섬세한 테크닉으로 전신의 피로를 완벽하게 풀어주는 인기 출장 힐링 마사지 코스.",
         items: [
           { time: "60분", price: "110,000원" },
           { time: "90분", price: "130,000원", recommend: true },
@@ -52,65 +53,48 @@ const shopData: Record<string, {
         ]
       }
     ],
-    features: ["100% 안심 후불제", "수도권 25분 내 도착", "24시간 상시 운영", "위생 및 방역 철저"]
+    features: ["100% 안심 후불제", "수도권 25분 내 도착", "24시간 상시 운영", "출장 타이 마사지 연계"]
   },
-
-  // ───────────────────────────────────────────
-  // 2. 한국미인테라피 (0507-1280-3303)
-  // ───────────────────────────────────────────
   "2": {
-    name: "🌸 한국미인테라피",
+    name: "한국미인테라피",
     phone: "0507-1280-3303",
     location: "서울 · 경기 · 인천 전지역 신속 방문",
     badge: "재방문율 최우수",
     image: "/shop2.jpg",
-    desc: "품격 있는 힐링을 선사하는 프라이빗 테라피! 태국 정통 아로디시부터 한국인 스웨디시까지 완벽 구비.",
+    desc: "품격 있는 힐링을 선사하는 프라이빗 방문 테라피! 출장 타이 마사지부터 출장 릴렉스 마사지까지 완벽 구비.",
     courses: [
       {
         category: "泰 아로디시 태국 코스",
-        desc: "아로마 오일의 부드러움과 스웨디시 기법을 조화롭게 결합한 실속 전신 케어.",
+        desc: "아로마 오일의 부드러움과 출장 타이 마사지 기법을 조화롭게 결합한 실속 전신 출장 케어.",
         items: [
           { time: "90분", price: "100,000원" },
           { time: "120분", price: "130,000원", recommend: true }
         ]
       },
       {
-        category: "特 혼혈 VIP 코스",
+        category: "特 프리미엄 출장 힐링 마사지",
         badge: "인기 추천",
-        desc: "세련된 감성 터치와 깊이 있는 전신 이완으로 지친 일상의 활력을 되찾아주는 코스.",
+        desc: "세련된 감성 터치와 깊이 있는 전신 이완으로 지친 일상의 활력을 되찾아주는 출장 마사지 코스.",
         items: [
           { time: "60분", price: "110,000원" },
           { time: "90분", price: "130,000원", recommend: true },
           { time: "120분", price: "150,000원" }
         ]
-      },
-      {
-        category: "韓 한국 스웨디시 코스",
-        badge: "프리미엄",
-        desc: "전문 자격을 갖춘 한국인 테라피스트의 프라이빗 1:1 맞춤형 감성 스웨디시 케어.",
-        items: [
-          { time: "60분", price: "140,000원" },
-          { time: "90분", price: "180,000원", recommend: true }
-        ]
       }
     ],
-    features: ["선입금 ZERO 100% 후불제", "전문 힐러 상시 대기", "철저한 프라이빗 보장", "맞춤형 코스 안내"]
+    features: ["선입금 ZERO 100% 후불제", "전문 힐러 상시 대기", "철저한 프라이빗 보장", "맞춤형 출장 마사지 안내"]
   },
-
-  // ───────────────────────────────────────────
-  // 3. 주주테라피 (0507-1280-3193)
-  // ───────────────────────────────────────────
   "3": {
-    name: "💎 주주테라피",
+    name: "주주테라피",
     phone: "0507-1280-3193",
     location: "서울 · 경기 · 인천 전지역 신속 도착",
     badge: "만족도 1위 추천",
     image: "/shop3.jpg",
-    desc: "재방문율 1위 만족도! 정통 건식 타이부터 올인원 VVIP 스페셜까지 체계적인 힐링 프로그램.",
+    desc: "재방문율 1위 만족도! 출장 타이 마사지부터 올인원 VVIP 출장 힐링 마사지까지 체계적인 프로그램.",
     courses: [
       {
-        category: "01 THAI | 전신 타이 스트레칭",
-        desc: "뭉치고 굳은 전신 근육을 시원하게 풀어주는 정통 타이 스트레칭 케어.",
+        category: "01 THAI | 전신 출장 타이 마사지",
+        desc: "뭉치고 굳은 전신 근육을 시원하게 풀어주는 정통 출장 타이 마사지 스트레칭 케어.",
         items: [
           { time: "60분", price: "60,000원" },
           { time: "90분 (추천)", price: "80,000원", recommend: true },
@@ -118,63 +102,29 @@ const shopData: Record<string, {
         ]
       },
       {
-        category: "02 AROMA | 부드러운 전신 아로마",
+        category: "02 AROMA | 부드러운 출장 아로마 마사지",
         badge: "인기 코스",
-        desc: "고급 천연 오일로 피로와 긴장을 부드럽게 완화시켜주는 전신 릴렉싱 케어.",
+        desc: "고급 천연 오일로 피로와 긴장을 부드럽게 완화시켜주는 전신 출장 릴렉스 마사지.",
         items: [
           { time: "60분", price: "80,000원" },
           { time: "90분 (인기)", price: "90,000원", recommend: true },
           { time: "120분", price: "110,000원" }
         ]
-      },
-      {
-        category: "03 VIP SWEDISH | 감성힐링 스웨디시",
-        badge: "💥 추천 코스",
-        desc: "따뜻한 오일과 섬세한 터치로 림프 순환을 돕고 깊은 힐링을 선사하는 코스.",
-        items: [
-          { time: "60분", price: "90,000원" },
-          { time: "90분 (강력추천)", price: "110,000원", recommend: true },
-          { time: "120분", price: "130,000원" }
-        ]
-      },
-      {
-        category: "04 VVIP SPECIAL | 올인원 스페셜코스",
-        badge: "💥 추천 올인원",
-        desc: "타이의 시원함과 스웨디시의 감성 테라피를 극대화한 주주 시그니처 코스.",
-        items: [
-          { time: "60분", price: "100,000원" },
-          { time: "90분 (인기)", price: "120,000원", recommend: true },
-          { time: "120분", price: "140,000원" },
-          { time: "150분", price: "160,000원" }
-        ]
-      },
-      {
-        category: "05 KOREAN | 한국인 전문 관리사 스웨디시",
-        badge: "프리미엄",
-        desc: "전문 자격을 갖춘 한국인 테라피스트의 수준 높은 1:1 맞춤 감성 스웨디시.",
-        items: [
-          { time: "60분", price: "140,000원" },
-          { time: "90분 (프리미엄)", price: "180,000원", recommend: true }
-        ]
       }
     ],
-    features: ["선입금 없는 100% 후불제", "평균 25분 빠른 방문", "24시간 상담 가능", "최고급 오일 사용"]
+    features: ["선입금 없는 100% 후불제", "평균 25분 빠른 출장 마사지", "24시간 상담 가능", "최고급 오일 사용"]
   },
-
-  // ───────────────────────────────────────────
-  // 4. 퀸즈홈테라피 (0507-1280-3334)
-  // ───────────────────────────────────────────
   "4": {
-    name: "👑 퀸즈홈테라피",
+    name: "퀸즈홈테라피",
     phone: "0507-1280-3334",
     location: "서울 · 경기 · 인천 전지역 방문",
     badge: "여왕처럼 누리는 VIP",
     image: "/shop4.jpg",
-    desc: "여왕처럼 누리는 고품격 테라피! 20~30대 한국인 전문 관리사의 품격 있는 1:1 맞춤 바디케어.",
+    desc: "여왕처럼 누리는 고품격 테라피! 전문 관리사들의 품격 있는 1:1 맞춤 출장 힐링 마사지 서비스.",
     courses: [
       {
-        category: "01 DRY | 건식 힐링 코스",
-        desc: "오일 없이 건식 지압과 스트레칭으로 굳은 전신 근육을 시원하게 풀어가는 코스.",
+        category: "01 DRY | 건식 출장 타이 마사지",
+        desc: "오일 없이 건식 지압과 스트레칭으로 굳은 전신 근육을 시원하게 풀어가는 출장 마사지 코스.",
         items: [
           { time: "60분", price: "60,000원" },
           { time: "90분", price: "80,000원", recommend: true },
@@ -182,60 +132,27 @@ const shopData: Record<string, {
         ]
       },
       {
-        category: "02 AROMA | 아로마 힐링 코스",
-        desc: "고급 아로마 오일을 사용하여 뭉친 피로를 부드럽게 이완시키는 릴렉싱 케어.",
+        category: "02 AROMA | 아로마 출장 릴렉스 마사지",
+        desc: "고급 아로마 오일을 사용하여 뭉친 피로를 부드럽게 이완시키는 방문 릴렉싱 케어.",
         items: [
           { time: "60분", price: "70,000원" },
           { time: "90분", price: "80,000원", recommend: true },
           { time: "120분", price: "100,000원" }
         ]
-      },
-      {
-        category: "03 SWEDISH | 힐링스웨디시 코스",
-        badge: "인기 만족",
-        desc: "따뜻한 오일과 부드러운 압으로 림프 순환과 깊은 휴식을 이끄는 감성 테라피.",
-        items: [
-          { time: "60분", price: "80,000원" },
-          { time: "90분", price: "100,000원", recommend: true },
-          { time: "120분", price: "120,000원" }
-        ]
-      },
-      {
-        category: "04 VIP SPECIAL | VIP 스페셜 코스",
-        badge: "시그니처",
-        desc: "건식의 시원함과 스웨디시의 부드러움을 한 번에 누리는 퀸즈 시그니처 코스.",
-        items: [
-          { time: "60분", price: "100,000원" },
-          { time: "90분", price: "120,000원", recommend: true },
-          { time: "120분", price: "150,000원" }
-        ]
-      },
-      {
-        category: "05 KOREAN CARE | 한국 관리사 코스",
-        badge: "👑 VIP 추천",
-        desc: "전문적인 실력과 정성을 겸비한 20~30대 한국인 전문 관리사의 프리미엄 케어.",
-        items: [
-          { time: "60분", price: "150,000원" },
-          { time: "90분", price: "180,000원", recommend: true }
-        ]
       }
     ],
-    features: ["100% 후불 안심결제", "2030 한국인 관리사", "수도권 전지역 방문", "24시간 예약 가능"]
+    features: ["100% 후불 안심결제", "전문 관리사 상시 대기", "수도권 전지역 출장 마사지", "24시간 예약 가능"]
   },
-
-  // ───────────────────────────────────────────
-  // 5. 오늘밤테라피 (0507-1280-3223)
-  // ───────────────────────────────────────────
   "5": {
-    name: "🌙 오늘밤테라피",
+    name: "오늘밤테라피",
     phone: "0507-1280-3223",
     location: "서울 · 경기 · 인천 전지역 실시간 방문",
     badge: "야간 힐링 만족 1위",
     image: "/shop5.jpg",
-    desc: "선입금 없는 100% 후불제! 깊은 밤 지친 하루의 피로를 완벽하게 날려버릴 나이트 맞춤 힐링 케어.",
+    desc: "선입금 없는 100% 후불제! 깊은 밤 지친 하루의 피로를 출장 힐링 마사지와 출장 릴렉스 마사지로 완벽하게 날려버리세요.",
     courses: [
       {
-        category: "01 DRY | 🧠 건식 테라피 코스",
+        category: "01 DRY | 🧠 건식 출장 타이 마사지",
         desc: "오일 없이 정통 건식 지압과 스트레칭으로 굳은 전신 근육과 피로를 시원하게 해소합니다.",
         items: [
           { time: "60분 코스", price: "60,000원" },
@@ -244,55 +161,40 @@ const shopData: Record<string, {
         ]
       },
       {
-        category: "02 SENSUAL | 🧠 센슈얼스웨디시 코스",
+        category: "02 SENSUAL | 🧠 감성 출장 스웨디시",
         badge: "감성 릴렉스",
-        desc: "감각적이고 섬세한 터치와 부드러운 스웨디시 기법으로 깊은 이완과 힐링을 선사합니다.",
+        desc: "감각적이고 섬세한 터치와 부드러운 출장 릴렉스 마사지 기법으로 깊은 이완과 힐링을 선사합니다.",
         items: [
           { time: "60분 코스", price: "90,000원" },
           { time: "90분 코스", price: "110,000원", recommend: true },
           { time: "120분 코스", price: "130,000원" }
         ]
-      },
-      {
-        category: "03 BEST VVIP | 🧠 전신혼합VVIP 코스",
-        badge: "🔥 최고 인기",
-        desc: "건식 지압의 개운함과 아로마/스웨디시의 부드러움을 동시에 누리는 최고 인기 종합 코스입니다.",
-        items: [
-          { time: "60분 코스", price: "100,000원" },
-          { time: "90분 코스", price: "120,000원", recommend: true },
-          { time: "120분 코스", price: "140,000원" },
-          { time: "150분 코스", price: "180,000원" }
-        ]
-      },
-      {
-        category: "04 SIGNATURE | 🧠 한국인 스웨디시 코스",
-        badge: "시그니처",
-        desc: "전문 한국인 테라피스트의 정성 가득한 감성 힐링으로 차원이 다른 만족감을 완성합니다.",
-        items: [
-          { time: "60분 코스", price: "140,000원" },
-          { time: "90분 코스", price: "180,000원", recommend: true }
-        ]
       }
     ],
-    features: ["100% 안심 후불제", "수도권 전지역 25분 칼도착", "심야 24시 상시 운영", "개인 맞춤 압 조절"]
+    features: ["100% 안심 후불제", "수도권 전지역 25분 칼도착 출장 마사지", "심야 24시 상시 운영", "개인 맞춤 압 조절"]
   }
 };
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params, searchParams }: PageProps): Promise<Metadata> {
   const resolvedParams = await params;
+  const resolvedSearchParams = await searchParams;
   const shop = shopData[resolvedParams.id] || shopData["1"];
+  
+  // URL 쿼리로 전달된 지역 키워드가 있다면 조합 (예: ?region=서울 강남구)
+  const regionPrefix = resolvedSearchParams.region ? `${decodeURIComponent(resolvedSearchParams.region)} 출장마사지 ` : "서울·경기·인천 출장마사지 ";
+  const fullTitleKeyword = `${regionPrefix}${shop.name}`;
 
   return {
-    title: `${shop.name} 코스 및 가격 안내 | 힐핏(HealFit) 24시 제휴`,
-    description: `${shop.name} 24시 안심 방문 테라피! 선입금 없는 100% 후불제, 코스별 가격비교 및 신속 예약 정보를 힐핏에서 확인하세요.`,
+    title: `${fullTitleKeyword} | 리추얼(Ritual) 24시 안심 후불제`,
+    description: `${fullTitleKeyword}! 선입금 없는 100% 후불제 시스템, 출장 릴렉스 및 타이 마사지 코스별 가격비교와 신속 예약 정보를 리추얼에서 확인하세요.`,
     alternates: {
-      canonical: `https://healfitmassage.netlify.app/shop/${resolvedParams.id}`,
+      canonical: `https://ritual-therapy.netlify.app/shop/${resolvedParams.id}`,
     },
     openGraph: {
-      title: `${shop.name} | 힐핏(HealFit) 프리미엄 제휴점`,
-      description: `${shop.name} 코스 및 가격 정보 안내. 100% 안심 후불제로 편안하게 이용해 보세요.`,
-      url: `https://healfitmassage.netlify.app/shop/${resolvedParams.id}`,
-      siteName: "힐핏(HealFit)",
+      title: `${fullTitleKeyword} | 리추얼(Ritual)`,
+      description: `${fullTitleKeyword} 코스 및 가격 정보 안내. 100% 안심 후불제로 편안하게 이용해 보세요.`,
+      url: `https://ritual-therapy.netlify.app/shop/${resolvedParams.id}`,
+      siteName: "리추얼(Ritual)",
       locale: "ko_KR",
       type: "website",
       images: [{ url: shop.image, width: 800, height: 600, alt: shop.name }],
@@ -300,22 +202,27 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function ShopDetailPage({ params }: PageProps) {
+export default async function ShopDetailPage({ params, searchParams }: PageProps) {
   const resolvedParams = await params;
+  const resolvedSearchParams = await searchParams;
   const shopId = resolvedParams.id;
   const shop = shopData[shopId] || shopData["1"];
+
+  // 동적 지역 키워드 조합 (기본값: 서울·경기·인천 지역별)
+  const dynamicRegion = resolvedSearchParams.region ? decodeURIComponent(resolvedSearchParams.region) : "서울·경기·인천";
+  const displayShopTitle = `${dynamicRegion} 출장마사지 ${shop.name}`;
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "HealthAndBeautyBusiness",
-    "name": `${shop.name} - 힐핏`,
+    "name": displayShopTitle,
     "description": shop.desc,
     "telephone": shop.phone,
-    "url": `https://healfitmassage.netlify.app/shop/${shopId}`,
-    "image": `https://healfitmassage.netlify.app${shop.image}`,
+    "url": `https://ritual-therapy.netlify.app/shop/${shopId}`,
+    "image": `https://ritual-therapy.netlify.app${shop.image}`,
     "address": {
       "@type": "PostalAddress",
-      "addressRegion": "수도권(서울, 경기, 인천)",
+      "addressRegion": `${dynamicRegion} 출장 마사지 구역`,
       "addressCountry": "KR"
     },
     "priceRange": "$$"
@@ -335,12 +242,12 @@ export default async function ShopDetailPage({ params }: PageProps) {
           <Link href="/" className="flex items-center gap-2.5 group">
             <img 
               src="/logo.png" 
-              alt="힐핏 로고" 
+              alt="리추얼 로고" 
               className="w-9 h-9 rounded-xl object-cover border border-amber-500/40 shadow-[0_0_10px_rgba(245,158,11,0.3)] group-hover:scale-105 transition-transform" 
             />
             <div className="flex flex-col">
               <span className="text-lg font-black tracking-wider bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-500 bg-clip-text text-transparent leading-none">
-                힐핏 <span className="text-xs text-amber-300/80 font-semibold">HealFit</span>
+                리추얼 <span className="text-xs text-amber-300/80 font-semibold">Ritual</span>
               </span>
             </div>
           </Link>
@@ -358,7 +265,7 @@ export default async function ShopDetailPage({ params }: PageProps) {
           <div className="relative h-64 md:h-80 w-full overflow-hidden">
             <img 
               src={shop.image} 
-              alt={shop.name} 
+              alt={displayShopTitle} 
               className="w-full h-full object-cover filter brightness-[0.55]" 
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#121216] via-transparent to-black/30"></div>
@@ -373,7 +280,7 @@ export default async function ShopDetailPage({ params }: PageProps) {
             </div>
 
             <h1 className="text-2xl md:text-4xl font-black text-white">
-              {shop.name}
+              {displayShopTitle}
             </h1>
 
             <p className="text-xs md:text-sm text-gray-300 leading-relaxed bg-black/60 p-4 rounded-2xl border border-white/5">
@@ -394,7 +301,7 @@ export default async function ShopDetailPage({ params }: PageProps) {
         <section className="bg-[#0f0f13] border border-amber-500/20 p-6 md:p-8 rounded-3xl space-y-6">
           <div className="text-center">
             <span className="text-amber-400 text-xs font-bold tracking-widest uppercase">PROGRAM & PRICE</span>
-            <h2 className="text-xl md:text-2xl font-black text-white mt-1">💎 정규 코스 및 요금 안내</h2>
+            <h2 className="text-xl md:text-2xl font-black text-white mt-1">💎 {displayShopTitle} 정규 코스 및 요금 안내</h2>
           </div>
 
           <div className="space-y-6">
@@ -448,11 +355,11 @@ export default async function ShopDetailPage({ params }: PageProps) {
         {/* 안내사항 */}
         <section className="bg-black/80 p-5 rounded-2xl border border-white/10">
           <h3 className="text-amber-400 font-bold text-sm mb-2 flex items-center gap-1.5">
-            <span>📌</span> 이용 예약 안내
+            <span>📌</span> 출장 마사지 이용 예약 안내
           </h3>
           <ul className="text-xs text-gray-300 space-y-1.5 list-disc list-inside">
-            <li>힐핏 입점 제휴업체는 <strong>100% 후불제</strong>로 운영됩니다. 출발 전 선입금을 절대 요구하지 않습니다.</li>
-            <li>희망하시는 시간 20~30분 전에 미리 예약 문의 주시면 보다 원활한 서비스 매칭이 가능합니다.</li>
+            <li>리추얼 제휴업체는 <strong>100% 후불제</strong> 출장 마사지 시스템으로 운영됩니다. 출발 전 선입금을 절대 요구하지 않습니다.</li>
+            <li>서울, 경기, 인천 희망하시는 시간 20~30분 전에 미리 예약 문의 주시면 보다 원활한 출장 힐링 마사지 매칭이 가능합니다.</li>
           </ul>
         </section>
 
@@ -468,7 +375,7 @@ export default async function ShopDetailPage({ params }: PageProps) {
             <span className="text-lg">📞</span> 전화로 즉시예약
           </a>
           <a 
-            href={`sms:${shop.phone}?body=${encodeURIComponent(`${shop.name} 예약 문의드립니다. (힐핏 보고 연락드렸습니다)`)}`}
+            href={`sms:${shop.phone}?body=${encodeURIComponent(`${displayShopTitle} 예약 문의드립니다. (리추얼 보고 연락드렸습니다)`)}`}
             className="flex items-center justify-center gap-2 bg-neutral-900 hover:bg-neutral-800 text-white font-black py-3.5 rounded-2xl text-xs md:text-sm border border-white/10 hover:border-amber-500/40 transition-transform active:scale-95"
           >
             <span className="text-lg">💬</span> 간편 문자상담

@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = 'https://healfitmassage.netlify.app';
+  const baseUrl = 'https://ritual-therapy.netlify.app';
 
   return {
     rules: {

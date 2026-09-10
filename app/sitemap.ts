@@ -1,8 +1,8 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  // 🌐 힐핏 Netlify 공식 도메인
-  const baseUrl = 'https://healfitmassage.netlify.app';
+  // 🌐 리추얼 Netlify 공식 도메인
+  const baseUrl = 'https://ritual-therapy.netlify.app';
 
   // 1. 메인 홈 페이지 (스팸/출장 제외 클린 웰니스 플랫폼)
   const mainRoute: MetadataRoute.Sitemap = [
@@ -121,10 +121,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { region: 'incheon', district: '옹진군' },
   ];
 
-  // 구/시 단위 동적 라우트 매핑 (/location/[region]/[district])
+  // 구/시 단위 동적 라우트 매핑 (/[region]/[district])
   const regionRoutes: MetadataRoute.Sitemap = regionList.map((item) => {
     return {
-      url: `${baseUrl}/location/${item.region}/${encodeURIComponent(item.district)}`,
+      url: `${baseUrl}/${item.region}/${encodeURIComponent(item.district)}`,
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 0.9,

@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "실제 고객 생생후기 | 만족도 5.0 안심 이용 리뷰 - 힐핏(HealFit)",
-  // 네이버 검색 최적 글자 수 (공백 포함 75~80자) 및 안심 신뢰 CTR 문구
-  description: "서울·경기·인천 힐핏 실제 이용 고객 100% 솔직 후기 모음! 신속 방문 만족도, 관리사 실력, 선입금 없는 후불제 안심 리뷰를 확인해 보세요.",
+  title: "실제 고객 생생후기 | 만족도 5.0 안심 이용 리뷰 - 리추얼(Ritual)",
+  // 네이버 검색 최적 글자 수 및 안심 신뢰 CTR 문구
+  description: "서울·경기·인천 리추얼 실제 이용 고객 100% 솔직 후기 모음! 신속 방문 만족도, 관리사 실력, 선입금 없는 후불제 안심 리뷰를 확인해 보세요.",
   keywords: [
-    "힐핏 후기",
+    "리추얼 후기",
     "마사지 이용후기",
     "홈케어 솔직리뷰",
     "출장마사지 후기",
@@ -15,13 +15,13 @@ export const metadata: Metadata = {
     "경기 마사지 리뷰"
   ],
   alternates: {
-    canonical: "https://healfitmassage.netlify.app/reviews",
+    canonical: "https://ritual-therapy.netlify.app/reviews",
   },
   openGraph: {
-    title: "실제 고객 생생후기 | 힐핏(HealFit) 검증된 100% 솔직 리뷰",
+    title: "실제 고객 생생후기 | 리추얼(Ritual) 검증된 100% 솔직 리뷰",
     description: "선입금 없는 안심 후불제와 빠른 방문! 서울·경기·인천 고객님들이 직접 작성한 생생한 피로회복 후기를 만나보세요.",
-    url: "https://healfitmassage.netlify.app/reviews",
-    siteName: "힐핏(HealFit)",
+    url: "https://ritual-therapy.netlify.app/reviews",
+    siteName: "리추얼(Ritual)",
     locale: "ko_KR",
     type: "website",
     images: [
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
         url: "/og-main.png",
         width: 1200,
         height: 630,
-        alt: "힐핏 실제 고객 생생후기",
+        alt: "리추얼 실제 고객 생생후기",
       },
     ],
   },
@@ -80,7 +80,7 @@ const reviews = [
     rate: "★★★★★ 5.0",
     course: "감성 스웨디시 60분",
     badge: "재이용 고객",
-    text: "타 플랫폼은 선입금 유도가 많아서 불안했는데, 힐핏은 확실한 후불 정찰제라 믿음이 갑니다. 친절하고 프라이빗한 케어 감사합니다.",
+    text: "타 플랫폼은 선입금 유도가 많아서 불안했는데, 리추얼은 확실한 후불 정찰제라 믿음이 갑니다. 친절하고 프라이빗한 케어 감사합니다.",
   },
 ];
 
@@ -95,10 +95,10 @@ export default function ReviewsPage() {
             REAL CUSTOMER REVIEWS
           </span>
           <h1 className="text-2xl md:text-4xl font-black text-white tracking-tight">
-            힐핏 실제 이용 고객 솔직 후기
+            리추얼 실제 이용 고객 솔직 후기
           </h1>
           <p className="text-xs md:text-sm text-gray-400 max-w-md mx-auto leading-relaxed">
-            서울·경기·인천 전지역에서 힐핏 서비스를 직접 경험하신 고객님들의 100% 솔직한 생생 후기입니다.
+            서울·경기·인천 전지역에서 리추얼 서비스를 직접 경험하신 고객님들의 100% 솔직한 생생 후기입니다.
           </p>
         </section>
 
@@ -163,7 +163,7 @@ export default function ReviewsPage() {
             🛡️ 100% 안심 후불 예약제 운영
           </h3>
           <p className="text-xs text-gray-400 max-w-md mx-auto leading-relaxed">
-            힐핏은 검증된 관리사 방문 후 결제되는 안전 시스템을 고수하고 있어 예약금 사기 걱정이 없습니다.
+            리추얼은 검증된 관리사 방문 후 결제되는 안전 시스템을 고수하고 있어 예약금 사기 걱정이 없습니다.
           </p>
           <div>
             <a 
@@ -181,7 +181,7 @@ export default function ReviewsPage() {
             href="/"
             className="inline-flex items-center gap-1 text-xs text-gray-400 hover:text-amber-400 transition-colors"
           >
-            ← 힐핏 메인 홈으로 이동하기
+            ← 리추얼 메인 홈으로 이동하기
           </Link>
         </div>
 

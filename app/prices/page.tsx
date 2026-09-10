@@ -2,26 +2,26 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "코스별 가격 안내 | 투명한 100% 후불 정찰제 - 힐핏(HealFit)",
-  // 네이버 검색 최적 글자 수 (공백 포함 75~80자) 및 안심 예약 CTR 문구
-  description: "서울·경기·인천 힐핏 투명한 코스별 가격 안내! 타이, 아로마, 스웨디시, VIP 맞춤 케어 비용과 100% 안심 후불제 예약 시스템을 확인하세요.",
+  title: "코스별 가격 안내 | 투명한 100% 후불 정찰제 - 리추얼(Ritual)",
+  // 네이버 검색 최적 글자 수 및 안심 예약 CTR 문구
+  description: "서울·경기·인천 리추얼 투명한 코스별 가격 안내! 릴렉스, 타이, 아로마, VIP 맞춤 케어 비용과 100% 안심 후불제 예약 시스템을 확인하세요.",
   keywords: [
-    "마사지 가격",
+    "테라피 가격",
     "홈케어 가격",
-    "타이마사지 비용",
+    "출장 타이마사지 비용",
     "아로마 테라피 요금",
     "스웨디시 가격",
     "후불제 바디케어",
-    "힐핏 가격안내"
+    "리추얼 가격안내"
   ],
   alternates: {
-    canonical: "https://healfitmassage.netlify.app/prices",
+    canonical: "https://ritual-therapy.netlify.app/prices",
   },
   openGraph: {
-    title: "코스별 가격 안내 | 힐핏(HealFit) 투명한 후불 정찰제",
-    description: "선입금 없는 100% 안심 후불제! 타이, 아로마, 스웨디시 맞춤 코스별 요금을 투명하게 비교해 보세요.",
-    url: "https://healfitmassage.netlify.app/prices",
-    siteName: "힐핏(HealFit)",
+    title: "코스별 가격 안내 | 리추얼(Ritual) 투명한 후불 정찰제",
+    description: "선입금 없는 100% 안심 후불제! 릴렉스, 타이, 아로마 맞춤 코스별 요금을 투명하게 비교해 보세요.",
+    url: "https://ritual-therapy.netlify.app/prices",
+    siteName: "리추얼(Ritual)",
     locale: "ko_KR",
     type: "website",
     images: [
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
         url: "/og-main.png",
         width: 1200,
         height: 630,
-        alt: "힐핏 코스별 가격 안내",
+        alt: "리추얼 코스별 가격 안내",
       },
     ],
   },
@@ -81,7 +81,7 @@ export default function PricesPage() {
             TRANSPARENT PRICE POLICY
           </span>
           <h1 className="text-2xl md:text-4xl font-black text-white tracking-tight">
-            힐핏 투명한 코스별 가격 안내
+            리추얼 투명한 코스별 가격 안내
           </h1>
           <p className="text-xs md:text-sm text-gray-400 max-w-md mx-auto leading-relaxed">
             100% 후불제 안심 예약 시스템으로 운영되며, 방문 전 일체의 선입금이나 예약금을 요구하지 않습니다.
@@ -98,7 +98,7 @@ export default function PricesPage() {
               선입금 ZERO · 100% 도착 후 결제 보장
             </h2>
             <p className="text-xs text-gray-400 leading-relaxed">
-              힐핏의 모든 제휴점은 테라피스트 도착 후 현장 결제로 진행되어 안심하고 이용하실 수 있습니다.
+              리추얼의 모든 제휴점은 테라피스트 도착 후 현장 결제로 진행되어 안심하고 이용하실 수 있습니다.
             </p>
           </div>
         </section>
@@ -176,7 +176,7 @@ export default function PricesPage() {
               href="/"
               className="inline-flex items-center gap-1 text-xs text-gray-400 hover:text-amber-400 transition-colors"
             >
-              ← 힐핏 메인 홈으로 이동하기
+              ← 리추얼 메인 홈으로 이동하기
             </Link>
           </div>
         </section>

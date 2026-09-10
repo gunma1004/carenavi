@@ -2,31 +2,31 @@ import { Metadata } from "next";
 import MainClientUI from "./MainClientUI";
 
 export const metadata: Metadata = {
-  title: "힐핏 (HealFit) | 서울·경기·인천 프리미엄 힐링 & 바디케어 플랫폼",
-  // 네이버 모바일/PC 최적 노출 글자 수 (공백 포함 75~80자 내외) 및 CTR 극대화 문구
-  description: "서울·경기·인천 100% 검증 힐링 테라피 힐핏! 타이, 아로마, 스웨디시 전문 제휴점 가격비교와 실시간 맞춤 바디케어 정보를 확인하세요.",
+  title: "리추얼 (Ritual) | 서울·경기·인천 프리미엄 방문 힐링 테라피 플랫폼",
+  // 네이버 모바일/PC 최적 노출 글자 수 및 클린 키워드 구성
+  description: "서울·경기·인천 100% 검증 방문 힐링 테라피 리추얼! 출장 릴렉스, 타이, 아로마 마사지 제휴점 가격비교와 실시간 맞춤 바디케어 정보를 확인하세요.",
   keywords: [
-    "힐핏",
-    "HealFit",
-    "마사지플랫폼",
+    "리추얼",
+    "Ritual",
+    "방문테라피플랫폼",
     "바디케어",
-    "타이테라피",
-    "아로마마사지",
-    "스웨디시",
-    "서울마사지",
-    "경기마사지",
-    "인천마사지",
+    "출장 타이 마사지",
+    "출장 아로마 마사지",
+    "출장 릴렉스 마사지",
+    "서울 방문 테라피",
+    "경기 홈케어",
+    "인천 바디케어",
     "힐링테라피",
     "프리미엄스파"
   ],
   alternates: {
-    canonical: "https://healfitmassage.netlify.app",
+    canonical: "https://ritual-therapy.netlify.app",
   },
   openGraph: {
-    title: "힐핏(HealFit) | 서울·경기·인천 프리미엄 바디케어 플랫폼",
-    description: "내 주변 검증된 테라피 샵 정보 총집합! 타이, 아로마, 스웨디시 맞춤 힐링 케어를 힐핏에서 바로 만나보세요.",
-    url: "https://healfitmassage.netlify.app",
-    siteName: "힐핏(HealFit)",
+    title: "리추얼(Ritual) | 서울·경기·인천 프리미엄 방문 힐링 테라피",
+    description: "내 주변 검증된 방문 테라피 샵 정보 총집합! 출장 릴렉스, 타이, 아로마 맞춤 힐링 케어를 리추얼에서 바로 만나보세요.",
+    url: "https://ritual-therapy.netlify.app",
+    siteName: "리추얼(Ritual)",
     locale: "ko_KR",
     type: "website",
     images: [
@@ -34,14 +34,14 @@ export const metadata: Metadata = {
         url: "/og-main.png",
         width: 1200,
         height: 630,
-        alt: "힐핏 - 프리미엄 힐링 & 바디케어 플랫폼",
+        alt: "리추얼 - 프리미엄 힐링 & 바디케어 플랫폼",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "힐핏 (HealFit) | 서울·경기·인천 프리미엄 바디케어",
-    description: "서울·경기·인천 검증된 테라피 제휴 정보 및 프리미엄 힐링 가이드",
+    title: "리추얼 (Ritual) | 서울·경기·인천 프리미엄 방문 테라피",
+    description: "서울·경기·인천 검증된 방문 테라피 제휴 정보 및 프리미엄 힐링 가이드",
     images: ["/og-main.png"],
   },
 };

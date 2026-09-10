@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
-// 서울·경기·인천 전지역 데이터
+// 서울·경기·인천 전지역 세부 데이터 (요청하신 모든 구·시·군·구조 완벽 반영)
 export const regionData: Record<string, { name: string; districts: Record<string, { name: string; dongs: string[] }> }> = {
   seoul: {
     name: "서울특별시",
@@ -58,27 +58,30 @@ export const regionData: Record<string, { name: string; districts: Record<string
       ansan_danwon: { name: "안산시 단원구", dongs: ["와동", "고잔동", "초지동", "원곡동", "백운동", "신길동", "성곡동", "대부동"] },
       anyang_manan: { name: "안양시 만안구", dongs: ["안양1동", "안양2동", "안양3동", "안양4동", "안양5동", "안양6동", "안양7동", "안양8동", "안양9동", "석수동", "박달동"] },
       anyang_dongan: { name: "안양시 동안구", dongs: ["비산동", "부흥동", "달안동", "관양동", "평촌동", "평안동", "귀인동", "범계동", "호계동"] },
-      namyangju: { name: "남양주시", dongs: ["와부읍", "진접읍", "화도읍", "수동면", "조안면", "퇴계원읍", "별내면", "별내동", "금곡동", "양정동", "다산동", "평내동", "호평동", "오남읍"] },
-      hwaseong: { name: "화성시", dongs: ["봉담읍", "우정읍", "향남읍", "남양읍", "매송면", "비봉면", "팔탄면", "장안면", "양감면", "정남면", "새솔동", "진안동", "병점동", "반월동", "기배동", "화산동", "동탄동"] },
-      pyeongtaek: { name: "평택시", dongs: ["진위면", "서탄면", "고덕면", "청북읍", "포승읍", "현덕면", "팽성읍", "신장동", "서정동", "송탄동", "지산동", "원평동", "비전동", "소사동", "세교동"] },
       uijeongbu: { name: "의정부시", dongs: ["의정부동", "호원동", "장암동", "신곡동", "송산동", "가능동", "흥선동", "자금동"] },
-      paju: { name: "파주시", dongs: ["문산읍", "조리읍", "법원읍", "파주읍", "탄현면", "광탄면", "월롱면", "적성면", "파평면", "교하동", "운정동", "금촌동"] },
-      gimpo: { name: "김포시", dongs: ["고촌읍", "통진읍", "대곶면", "월곶면", "하성면", "사우동", "풍무동", "장기동", "구래동", "운양동", "마산동"] },
-      siheung: { name: "시흥시", dongs: ["대야동", "신천동", "신현동", "은행동", "매화동", "목감동", "군자동", "월곶동", "정왕동", "배곧동", "과림동", "연성동"] },
       gwangmyeong: { name: "광명시", dongs: ["광명동", "철산동", "하안동", "소하동", "학온동"] },
-      gwangju: { name: "광주시", dongs: ["오포읍", "초월읍", "퇴촌면", "남종면", "남한산성면", "송정동", "광남동"] },
-      hanam: { name: "하남시", dongs: ["천현동", "신장동", "덕풍동", "감북동", "위례동", "미사동", "춘궁동", "초이동"] },
-      gunpo: { name: "군포시", dongs: ["군포동", "산본동", "금정동", "재궁동", "오금동", "수리동", "대야미동"] },
+      pyeongtaek: { name: "평택시", dongs: ["진위면", "서탄면", "고덕면", "청북읍", "포승읍", "현덕면", "팽성읍", "신장동", "서정동", "송탄동", "지산동", "원평동", "비전동", "소사동", "세교동"] },
+      dongducheon: { name: "동두천시", dongs: ["생연동", "보산동", "동두천동", "상패동", "중앙동", "송내동", "불현동"] },
+      guri: { name: "구리시", dongs: ["갈매동", "동구동", "인창동", "교문1동", "교문2동", "토평동", "수택1동", "수택2동", "수택3동"] },
+      namyangju: { name: "남양주시", dongs: ["와부읍", "진접읍", "화도읍", "수동면", "조안면", "퇴계원읍", "별내면", "별내동", "금곡동", "양정동", "다산동", "평내동", "호평동", "오남읍"] },
       osan: { name: "오산시", dongs: ["중앙동", "신장동", "세마동", "초평동", "대원동"] },
+      siheung: { name: "시흥시", dongs: ["대야동", "신천동", "신현동", "은행동", "매화동", "목감동", "군자동", "월곶동", "정왕동", "배곧동", "과림동", "연성동"] },
+      gunpo: { name: "군포시", dongs: ["군포동", "산본동", "금정동", "재궁동", "오금동", "수리동", "대야미동"] },
+      uiwang: { name: "의왕시", dongs: ["고천동", "부곡동", "내손1동", "내손2동", "청계동", "오전동"] },
+      hanam: { name: "하남시", dongs: ["천현동", "신장동", "덕풍동", "감북동", "위례동", "미사동", "춘궁동", "초이동"] },
+      paju: { name: "파주시", dongs: ["문산읍", "조리읍", "법원읍", "파주읍", "탄현면", "광탄면", "월롱면", "적성면", "파평면", "교하동", "운정동", "금촌동"] },
       icheon: { name: "이천시", dongs: ["창전동", "중리동", "증포동", "부발읍", "장호원읍"] },
       anseong: { name: "안성시", dongs: ["공도읍", "죽산면", "삼죽면", "보개면", "금광면", "서운면", "미양면", "대덕면", "원곡면", "양성면", "안성동"] },
+      gimpo: { name: "김포시", dongs: ["고촌읍", "통진읍", "대곶면", "월곶면", "하성면", "사우동", "풍무동", "장기동", "구래동", "운양동", "마산동"] },
+      hwaseong: { name: "화성시", dongs: ["봉담읍", "우정읍", "향남읍", "남양읍", "매송면", "비봉면", "팔탄면", "장안면", "양감면", "정남면", "새솔동", "진안동", "병점동", "반월동", "기배동", "화산동", "동탄동"] },
+      gwangju: { name: "광주시", dongs: ["오포읍", "초월읍", "퇴촌면", "남종면", "남한산성면", "송정동", "광남동"] },
       yangju: { name: "양주시", dongs: ["회천동", "양주동", "백석읍", "은현면", "남면", "장흥면"] },
       pochon: { name: "포천시", dongs: ["소흘읍", "군내면", "내촌면", "가산면", "일동면", "이동면", "영중면", "창수면", "관인면", "화현면", "포천동", "선단동"] },
       yeoju: { name: "여주시", dongs: ["여흥동", "중앙동", "오학동", "가남읍"] },
-      dongducheon: { name: "동두천시", dongs: ["생연동", "보산동", "동두천동", "상패동", "중앙동", "송내동", "불현동"] },
+      yeoncheon: { name: "연천군", dongs: ["연천읍", "전곡읍", "군남면", "청산면", "백학면", "미산면", "왕징면", "신서면", "중면"] },
       gapyeong: { name: "가평군", dongs: ["가평읍", "설악면", "청평면", "상면", "조종면", "북면"] },
       yangpyeong: { name: "양평군", dongs: ["양평읍", "강상면", "강하면", "양서면", "옥천면", "지평면", "용문면", "개군면"] },
-      yeoncheon: { name: "연천군", dongs: ["연천읍", "전곡읍", "군남면", "청산면", "백학면", "미산면", "왕징면", "신서면", "중면"] }
+      gwacheon: { name: "과천시", dongs: ["중앙동", "갈현동", "별양동", "부림동", "원문동", "과천동", "문원동"] },
     }
   },
   incheon: {
@@ -98,10 +101,10 @@ export const regionData: Record<string, { name: string; districts: Record<string
   }
 };
 
-const localShops = [
+const baseLocalShops = [
   {
     id: 1,
-    name: "✨ 한국골든테라피",
+    name: "✨ 리추얼 골든테라피",
     desc: "서울·경기·인천 전지역 신속 케어! VIP 골든 릴렉싱 & 딥티슈 피로회복 전문",
     phone: "0507-1280-3361",
     price: "80,000원부터~",
@@ -109,7 +112,7 @@ const localShops = [
   },
   {
     id: 2,
-    name: "🌸 한국미인테라피",
+    name: "🌸 리추얼 미인테라피",
     desc: "품격 있는 힐링을 선사하는 최고급 천연 오일 스웨디시 & 아로마 맞춤 케어",
     phone: "0507-1280-3303",
     price: "70,000원부터~",
@@ -117,7 +120,7 @@ const localShops = [
   },
   {
     id: 3,
-    name: "💎 주주테라피",
+    name: "💎 리추얼 프리미엄",
     desc: "재방문율 1위 만족도! 철저한 위생 관리와 감성 충만 프라이빗 힐링 코스",
     phone: "0507-1280-3193",
     price: "60,000원부터~",
@@ -125,7 +128,7 @@ const localShops = [
   },
   {
     id: 4,
-    name: "👑 퀸즈홈테라피",
+    name: "👑 퀸즈 리추얼홈",
     desc: "여왕처럼 누리는 프리미엄 바디케어! 전문 힐러들의 1:1 VIP 힐링 프로그램",
     phone: "0507-1280-3334",
     price: "60,000원부터~",
@@ -133,7 +136,7 @@ const localShops = [
   },
   {
     id: 5,
-    name: "🌙 오늘밤테라피",
+    name: "🌙 오늘밤 리추얼",
     desc: "100% 안심 후불제! 지친 일상 끝에 완벽한 휴식을 선사하는 야간 맞춤 테라피",
     phone: "0507-1280-3223",
     price: "60,000원부터~",
@@ -167,6 +170,14 @@ export default function MainClientUI() {
   const [selectedRegion, setSelectedRegion] = useState("seoul");
   const [selectedDistrict, setSelectedDistrict] = useState("");
   const [selectedDong, setSelectedDong] = useState("");
+  
+  // 새로고침할 때마다 샵 5개의 순위가 랜덤하게 섞이도록 처리
+  const [shuffledShops, setShuffledShops] = useState(baseLocalShops);
+
+  useEffect(() => {
+    const shuffled = [...baseLocalShops].sort(() => Math.random() - 0.5);
+    setShuffledShops(shuffled);
+  }, []);
 
   const handleRegionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedRegion(e.target.value);
@@ -209,7 +220,7 @@ export default function MainClientUI() {
             <div className="absolute inset-0 z-0">
               <img 
                 src="/banner.jpg" 
-                alt="힐핏 프리미엄 스파 테라피 배너" 
+                alt="리추얼 프리미엄 스파 테라피 배너" 
                 className="w-full h-full object-cover filter brightness-[0.35] scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#08080a] via-black/40 to-transparent"></div>
@@ -229,17 +240,17 @@ export default function MainClientUI() {
           </div>
         </section>
 
-        {/* 2. 🔥 프리미엄 추천 제휴 파트너 (BEST 5) - 최상단 우선 노출로 CTR 극대화 */}
+        {/* 2. 🔥 프리미엄 추천 제휴 파트너 (BEST 5) - 새로고침 시 랜덤 순위 반영 */}
         <section className="space-y-6">
           <div className="text-center mb-6">
             <p className="text-xs text-amber-400 font-bold tracking-widest uppercase">BEST PARTNER SHOPS</p>
             <h2 className="text-xl md:text-2xl font-black text-white mt-1">
-              🏆 힐핏 추천 프리미엄 제휴점 (BEST 5)
+              🏆 리추얼 추천 프리미엄 제휴점 (BEST 5)
             </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {localShops.map((lShop) => (
+            {shuffledShops.map((lShop) => (
               <div key={lShop.id} className="bg-[#121216] border border-amber-500/20 hover:border-amber-500/60 rounded-2xl p-4 flex gap-4 items-center shadow-md transition-all group relative">
                 
                 <Link href={`/shop/${lShop.id}`} className="absolute inset-0 z-10" aria-label={`${lShop.name} 상세페이지 보기`} />
@@ -271,7 +282,7 @@ export default function MainClientUI() {
           </div>
         </section>
 
-        {/* 3. 📍 내 동네/세부 구·동 검색 박스 (업체 카드 다음 순서로 배치) */}
+        {/* 3. 📍 내 동네/세부 구·동 검색 박스 */}
         <section className="pt-4">
           <div className="bg-gradient-to-b from-[#141418] to-[#0d0d10] border-2 border-amber-500/40 p-6 md:p-8 rounded-3xl max-w-xl mx-auto shadow-[0_10px_35px_rgba(0,0,0,0.8)] text-left relative overflow-hidden">
             <div className="flex items-center justify-between mb-5">
@@ -342,11 +353,11 @@ export default function MainClientUI() {
           </div>
         </section>
 
-        {/* 4. 힐핏 이용 안내 4단계 */}
+        {/* 4. 리추얼 이용 안내 4단계 */}
         <section className="bg-[#0f0f13] border border-amber-500/30 p-6 md:p-8 rounded-3xl space-y-6">
           <div className="text-center">
             <span className="text-amber-400 text-xs font-bold tracking-widest uppercase">SERVICE PROCESS</span>
-            <h3 className="text-xl font-black text-white mt-1">힐핏 간편 이용 안내</h3>
+            <h3 className="text-xl font-black text-white mt-1">리추얼 간편 이용 안내</h3>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             <div className="bg-black/60 p-4 rounded-2xl border border-white/5 text-center">
@@ -357,7 +368,7 @@ export default function MainClientUI() {
             <div className="bg-black/60 p-4 rounded-2xl border border-white/5 text-center">
               <span className="text-xs text-amber-400 font-bold">STEP 2</span>
               <h4 className="font-bold text-white mt-1">프로그램 비교</h4>
-              <p className="text-xs text-gray-400 mt-1">타이, 아로마, 스웨디시 코스를 비교합니다.</p>
+              <p className="text-xs text-gray-400 mt-1">릴렉스, 타이, 아로마 코스를 비교합니다.</p>
             </div>
             <div className="bg-black/60 p-4 rounded-2xl border border-white/5 text-center">
               <span className="text-xs text-amber-400 font-bold">STEP 3</span>
@@ -413,7 +424,7 @@ export default function MainClientUI() {
             />
             <FaqItem 
               question="선입금이나 예약금이 발생하나요?"
-              answer="힐핏에 입점된 모든 제휴업체는 100% 안심 후불제로 운영되므로 도착 전 어떠한 선입금도 요구하지 않습니다."
+              answer="리추얼에 입점된 모든 제휴업체는 100% 안심 후불제로 운영되므로 도착 전 어떠한 선입금도 요구하지 않습니다."
             />
           </div>
         </section>
@@ -428,11 +439,11 @@ export default function MainClientUI() {
               href="tel:0507-1280-3344" 
               className="inline-flex items-center gap-1.5 bg-neutral-900 hover:bg-neutral-800 text-amber-400 font-bold px-4 py-2 rounded-xl border border-amber-500/30 hover:border-amber-400 transition-all text-xs shadow-md"
             >
-              <span>🤝</span> 힐핏 입점 및 제휴문의 (0507-1280-3344)
+              <span>🤝</span> 리추얼 입점 및 제휴문의 (0507-1280-3344)
             </a>
           </div>
-          <p className="text-gray-400 font-bold">힐핏(HealFit)은 건전하고 안전한 프리미엄 테라피 & 바디케어 정보 플랫폼입니다.</p>
-          <p className="text-[11px] text-gray-600">COPYRIGHT &copy; HealFit ALL RIGHTS RESERVED.</p>
+          <p className="text-gray-400 font-bold">리추얼(Ritual)은 건전하고 안전한 프리미엄 테라피 & 바디케어 정보 플랫폼입니다.</p>
+          <p className="text-[11px] text-gray-600">COPYRIGHT &copy; Ritual ALL RIGHTS RESERVED.</p>
         </div>
       </footer>
     </div>

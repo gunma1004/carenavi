@@ -15,12 +15,12 @@ export default function NavigationHeader() {
         <Link href="/" className="flex items-center gap-2.5 group">
           <img 
             src="/logo.png" 
-            alt="힐핏 로고" 
+            alt="리추얼 로고" 
             className="w-9 h-9 rounded-xl object-cover border border-amber-500/40 shadow-[0_0_10px_rgba(245,158,11,0.3)] group-hover:scale-105 transition-transform" 
           />
           <div className="flex flex-col">
             <span className="text-lg font-black tracking-wider bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-500 bg-clip-text text-transparent leading-none">
-              힐핏 <span className="text-xs text-amber-300/80 font-semibold tracking-normal">HealFit</span>
+              리추얼 <span className="text-xs text-amber-300/80 font-semibold tracking-normal">Ritual</span>
             </span>
           </div>
         </Link>

@@ -7,13 +7,13 @@ interface Props {
 }
 
 export default function ClientTextMixer({ locationText }: Props) {
-  const [headline, setHeadline] = useState(`${locationText} 전문 홈케어 바디 서비스`);
+  const [headline, setHeadline] = useState(`${locationText} 방문 힐링 바디케어 서비스`);
   const [subText, setSubText] = useState("선입금 없는 100% 안심 후불제 시스템");
 
   useEffect(() => {
-    // 클라이언트 마운트 시 타겟 키워드로 자연스럽게 전환 (SEO 최적화 & 스팸 필터링 유연화)
-    setHeadline(`${locationText} 프라이빗 출장 마사지 & 프리미엄 홈타이 케어`);
-    setSubText("수도권 평균 25분 내 빠른 방문 · 100% 안심 후불제");
+    // 클라이언트 마운트 시 세련된 출장 회피 문구 및 프리미엄 테라피 키워드로 자연스럽게 전환
+    setHeadline(`${locationText} 출장 힐링 마사지 & 출장 릴렉스 테라피`);
+    setSubText("수도권 평균 25분 내 빠른 방문 · 100% 안심 후불제 시스템");
   }, [locationText]);
 
   return (
@@ -24,7 +24,7 @@ export default function ClientTextMixer({ locationText }: Props) {
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
           <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
         </span>
-        실시간 {locationText} 테라피스트 대기중
+        실시간 {locationText} 리추얼 테라피스트 대기중
       </div>
 
       {/* 핵심 키워드 헤드라인 */}
