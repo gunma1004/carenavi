@@ -189,10 +189,11 @@ export default async function RegionalDetailPage({ params, searchParams }: PageP
     ? `${regionName} ${districtName} (${dongName})` 
     : `${regionName} ${districtName}`;
 
+  // 🌟 [핵심 수정] 지역별 샵 이름을 "지역 + 출장마사지 + 샵이름" 형태로 동적 결합
   const localShops = [
     {
       id: 1,
-      name: `✨ ${fullTitle} 리추얼 골든테라피`,
+      name: `✨ ${fullTitle} 출장마사지 한국골든테라피`,
       desc: "VIP 골든 릴렉싱 & 딥티슈 피로회복! 베테랑 테라피스트의 품격 있는 1:1 맞춤 케어",
       phone: "0507-1280-3361",
       price: "80,000원부터~",
@@ -200,7 +201,7 @@ export default async function RegionalDetailPage({ params, searchParams }: PageP
     },
     {
       id: 2,
-      name: `🌸 ${fullTitle} 리추얼 미인테라피`,
+      name: `🌸 ${fullTitle} 출장마사지 한국미인테라피`,
       desc: "최고급 천연 오일을 활용한 감성 스웨디시 & 아로마 전신 림프 순환 프로그램",
       phone: "0507-1280-3303",
       price: "70,000원부터~",
@@ -208,7 +209,7 @@ export default async function RegionalDetailPage({ params, searchParams }: PageP
     },
     {
       id: 3,
-      name: `💎 ${fullTitle} 리추얼 프리미엄`,
+      name: `💎 ${fullTitle} 출장마사지 주주테라피`,
       desc: "재방문율 1위 만족도! 철저한 위생 관리와 프라이빗 힐링 바디케어 서비스 제공",
       phone: "0507-1280-3193",
       price: "60,000원부터~",
@@ -216,7 +217,7 @@ export default async function RegionalDetailPage({ params, searchParams }: PageP
     },
     {
       id: 4,
-      name: `👑 ${fullTitle} 퀸즈 리추얼홈`,
+      name: `👑 ${fullTitle} 출장마사지 퀸즈홈테라피`,
       desc: "여왕처럼 누리는 VIP 홈케어! 전문 힐러들의 체형 맞춤형 피로회복 특화 프로그램",
       phone: "0507-1280-3334",
       price: "60,000원부터~",
@@ -224,7 +225,7 @@ export default async function RegionalDetailPage({ params, searchParams }: PageP
     },
     {
       id: 5,
-      name: `🌙 ${fullTitle} 오늘밤 리추얼`,
+      name: `🌙 ${fullTitle} 출장마사지 오늘밤테라피`,
       desc: "선입금 전혀 없는 100% 안심 후불제! 수도권 전지역 25분 내 빠른 방문 힐링",
       phone: "0507-1280-3223",
       price: "60,000원부터~",
@@ -292,7 +293,8 @@ export default async function RegionalDetailPage({ params, searchParams }: PageP
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {localShops.map((lShop) => (
               <div key={lShop.id} className="bg-[#121216] border border-amber-500/20 hover:border-amber-500/60 rounded-2xl p-4 flex gap-4 items-center shadow-lg transition-all group relative">
-                <Link href={`/shop/${lShop.id}`} className="absolute inset-0 z-10" aria-label={`${lShop.name} 상세페이지 보기`} />
+                {/* 🌟 샵 상세 페이지로 넘어갈 때 지역 파라미터(region)를 함께 전달하여 샵 상세에서도 키워드 연동 */}
+                <Link href={`/shop/${lShop.id}?region=${encodeURIComponent(fullTitle)}`} className="absolute inset-0 z-10" aria-label={`${lShop.name} 상세페이지 보기`} />
                 <img 
                   src={lShop.image} 
                   alt={lShop.name} 
