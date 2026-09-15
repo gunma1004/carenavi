@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   },
   verification: {
     other: {
-      "naver-site-verification": "76130256a14b2cd26086feb856d7ab7a0e3566ba", // 필요시 본인 인증 코드로 변경하세요
+      "naver-site-verification": "f5b08fea69af6b297e2bf76136c8596c95437ade", // 필요시 본인 인증 코드로 변경하세요
     },
   },
   openGraph: {
