@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ClientTextMixerInline } from "../../ClientTextMixerInline";
 
 interface PageProps {
   params: Promise<{
@@ -179,7 +178,7 @@ export default async function RegionalDetailPage({ params, searchParams }: PageP
     }
   ];
 
- const jsonLd = {
+  const jsonLd = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": `${fullTitle} 힐링 테라피 & 제휴 샵 안내 - 케어나비`,
@@ -215,8 +214,6 @@ export default async function RegionalDetailPage({ params, searchParams }: PageP
             </p>
           </div>
         </section>
-
-        <ClientTextMixerInline locationText={fullTitle} />
 
         <section className="space-y-6">
           <div className="text-center">
