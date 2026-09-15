@@ -2,26 +2,25 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "코스별 가격 안내 | 투명한 100% 후불 정찰제 - 리추얼(Ritual)",
-  // 네이버 검색 최적 글자 수 및 안심 예약 CTR 문구
-  description: "서울·경기·인천 리추얼 투명한 코스별 가격 안내! 릴렉스, 타이, 아로마, VIP 맞춤 케어 비용과 100% 안심 후불제 예약 시스템을 확인하세요.",
+  title: "코스별 가격 안내 | 투명한 100% 후불 정찰제 - 케어나비(CareNavi)",
+  description: "서울·경기·인천 케어나비 투명한 코스별 가격 안내! 릴렉스, 타이, 아로마, VIP 맞춤 케어 비용과 100% 안심 후불제 예약 시스템을 확인하세요.",
   keywords: [
+    "케어나비 가격",
     "테라피 가격",
-    "홈케어 가격",
-    "출장 타이마사지 비용",
+    "홈케어 요금",
+    "타이마사지 비용",
     "아로마 테라피 요금",
     "스웨디시 가격",
-    "후불제 바디케어",
-    "리추얼 가격안내"
+    "후불제 바디케어"
   ],
   alternates: {
-    canonical: "https://ritual-therapy.netlify.app/prices",
+    canonical: "https://carenavi.netlify.app/prices",
   },
   openGraph: {
-    title: "코스별 가격 안내 | 리추얼(Ritual) 투명한 후불 정찰제",
+    title: "코스별 가격 안내 | 케어나비(CareNavi) 투명한 후불 정찰제",
     description: "선입금 없는 100% 안심 후불제! 릴렉스, 타이, 아로마 맞춤 코스별 요금을 투명하게 비교해 보세요.",
-    url: "https://ritual-therapy.netlify.app/prices",
-    siteName: "리추얼(Ritual)",
+    url: "https://carenavi.netlify.app/prices",
+    siteName: "케어나비 (CareNavi)",
     locale: "ko_KR",
     type: "website",
     images: [
@@ -29,7 +28,7 @@ export const metadata: Metadata = {
         url: "/og-main.png",
         width: 1200,
         height: 630,
-        alt: "리추얼 코스별 가격 안내",
+        alt: "케어나비 코스별 가격 안내",
       },
     ],
   },
@@ -72,33 +71,33 @@ const priceList = [
 
 export default function PricesPage() {
   return (
-    <div className="bg-[#08080a] text-gray-100 min-h-screen py-10 px-4 font-sans selection:bg-amber-500 selection:text-black">
+    <div className="bg-slate-50 text-slate-800 min-h-screen py-10 px-4 font-sans selection:bg-sky-500 selection:text-white">
       <div className="max-w-3xl mx-auto space-y-8">
         
         {/* 상단 타이틀 헤더 */}
         <section className="text-center space-y-3">
-          <span className="inline-block px-3.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-black tracking-widest uppercase">
+          <span className="inline-block px-3.5 py-1 rounded-full bg-sky-50 border border-sky-200 text-sky-700 text-xs font-black tracking-widest uppercase shadow-sm">
             TRANSPARENT PRICE POLICY
           </span>
-          <h1 className="text-2xl md:text-4xl font-black text-white tracking-tight">
-            리추얼 투명한 코스별 가격 안내
+          <h1 className="text-2xl md:text-4xl font-black text-slate-900 tracking-tight">
+            케어나비 투명한 코스별 가격 안내
           </h1>
-          <p className="text-xs md:text-sm text-gray-400 max-w-md mx-auto leading-relaxed">
+          <p className="text-xs md:text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
             100% 후불제 안심 예약 시스템으로 운영되며, 방문 전 일체의 선입금이나 예약금을 요구하지 않습니다.
           </p>
         </section>
 
         {/* 100% 안심 보증 배너 */}
-        <section className="bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-amber-500/10 border border-amber-500/30 p-5 rounded-2xl flex items-center gap-4 shadow-[0_0_20px_rgba(245,158,11,0.08)]">
-          <div className="w-12 h-12 rounded-xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-2xl shrink-0">
+        <section className="bg-gradient-to-r from-sky-500/10 via-sky-500/5 to-sky-500/10 border border-sky-200 p-5 rounded-2xl flex items-center gap-4 shadow-sm">
+          <div className="w-12 h-12 rounded-xl bg-sky-100 border border-sky-200 flex items-center justify-center text-2xl shrink-0">
             🛡️
           </div>
           <div className="space-y-0.5">
-            <h2 className="text-sm font-bold text-amber-300">
-              선입금 ZERO · 100% 도착 후 결제 보장
+            <h2 className="text-sm font-bold text-sky-900">
+              선입금 ZERO · 100% 현장 결제 보장
             </h2>
-            <p className="text-xs text-gray-400 leading-relaxed">
-              리추얼의 모든 제휴점은 테라피스트 도착 후 현장 결제로 진행되어 안심하고 이용하실 수 있습니다.
+            <p className="text-xs text-slate-600 leading-relaxed">
+              케어나비의 모든 제휴점은 서비스 진행 후 현장 결제로 진행되어 안심하고 이용하실 수 있습니다.
             </p>
           </div>
         </section>
@@ -108,10 +107,10 @@ export default function PricesPage() {
           {priceList.map((item, idx) => (
             <div 
               key={idx} 
-              className={`bg-[#121216] border rounded-2xl p-5 md:p-6 transition-all shadow-md group relative ${
+              className={`bg-white border rounded-2xl p-5 md:p-6 transition-all shadow-sm group relative ${
                 item.highlight 
-                  ? "border-amber-500/60 shadow-[0_0_20px_rgba(245,158,11,0.15)] bg-gradient-to-b from-[#16161b] to-[#121216]" 
-                  : "border-white/5 hover:border-amber-500/40"
+                  ? "border-sky-300 shadow-md bg-gradient-to-b from-sky-50/50 to-white" 
+                  : "border-slate-200 hover:border-sky-300"
               }`}
             >
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -119,29 +118,29 @@ export default function PricesPage() {
                   <div className="flex items-center gap-2">
                     <span className={`text-[10px] font-black px-2.5 py-0.5 rounded-full border ${
                       item.highlight 
-                        ? "bg-amber-500 text-black border-amber-400" 
-                        : "bg-amber-500/10 text-amber-400 border-amber-500/30"
+                        ? "bg-sky-600 text-white border-sky-600" 
+                        : "bg-sky-50 text-sky-700 border-sky-200"
                     }`}>
                       {item.badge}
                     </span>
-                    <span className="text-[11px] text-gray-400 font-medium">
+                    <span className="text-[11px] text-slate-500 font-medium">
                       ⏱️ {item.duration}
                     </span>
                   </div>
 
-                  <h3 className="font-extrabold text-base md:text-lg text-white group-hover:text-amber-400 transition-colors">
+                  <h3 className="font-extrabold text-base md:text-lg text-slate-900 group-hover:text-sky-600 transition-colors">
                     {item.title}
                   </h3>
-                  <p className="text-xs text-gray-400 leading-relaxed">
+                  <p className="text-xs text-slate-600 leading-relaxed">
                     {item.desc}
                   </p>
                 </div>
 
-                <div className="flex md:flex-col items-center md:items-end justify-between border-t border-white/5 md:border-0 pt-3 md:pt-0">
-                  <span className="text-amber-400 font-black text-lg md:text-xl tracking-tight">
+                <div className="flex md:flex-col items-center md:items-end justify-between border-t border-slate-100 md:border-0 pt-3 md:pt-0">
+                  <span className="text-sky-600 font-black text-lg md:text-xl tracking-tight">
                     {item.price}
                   </span>
-                  <span className="text-[10px] text-gray-500 font-medium">
+                  <span className="text-[10px] text-slate-400 font-medium">
                     (VAT 포함 / 100% 후불)
                   </span>
                 </div>
@@ -151,13 +150,13 @@ export default function PricesPage() {
         </section>
 
         {/* 하단 이용 가이드 및 주의사항 */}
-        <section className="bg-[#0f0f13] border border-white/5 p-6 rounded-3xl space-y-3 text-xs text-gray-400 leading-relaxed">
-          <h4 className="font-bold text-white text-sm flex items-center gap-1.5">
+        <section className="bg-white border border-slate-200 p-6 rounded-3xl space-y-3 text-xs text-slate-600 leading-relaxed shadow-sm">
+          <h4 className="font-bold text-slate-900 text-sm flex items-center gap-1.5">
             <span>📌</span> 이용 요금 및 예약 안내 사항
           </h4>
           <ul className="list-disc list-inside space-y-1 pl-1">
-            <li>서울, 경기, 인천 전 지역 거점 기준 별도의 이동 추가 요금 없이 정찰제로 이용하실 수 있습니다.</li>
-            <li>심야 시간대 및 일부 외곽 지역의 경우 상황에 따라 약간의 이동 조율이 발생할 수 있습니다.</li>
+            <li>서울, 경기, 인천 전 지역 거점 기준 투명한 정찰제로 이용하실 수 있습니다.</li>
+            <li>심야 시간대 및 일부 외곽 지역의 경우 상황에 따라 약간의 조율이 발생할 수 있습니다.</li>
             <li>과도한 음주 또는 비매너 이용 시 서비스 제공이 제한될 수 있습니다.</li>
           </ul>
         </section>
@@ -166,7 +165,7 @@ export default function PricesPage() {
         <section className="text-center pt-2 space-y-4">
           <a 
             href="tel:0507-1280-3344"
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 hover:from-amber-400 hover:to-yellow-300 text-black font-black text-sm px-8 py-3.5 rounded-2xl shadow-[0_0_20px_rgba(245,158,11,0.3)] transition-all transform active:scale-95"
+            className="inline-flex items-center gap-2 bg-sky-600 hover:bg-sky-700 text-white font-black text-sm px-8 py-3.5 rounded-2xl shadow-sm transition-all transform active:scale-95"
           >
             📞 실시간 코스 및 비용 상담하기
           </a>
@@ -174,9 +173,9 @@ export default function PricesPage() {
           <div>
             <Link 
               href="/"
-              className="inline-flex items-center gap-1 text-xs text-gray-400 hover:text-amber-400 transition-colors"
+              className="inline-flex items-center gap-1 text-xs text-slate-500 hover:text-sky-600 transition-colors font-medium"
             >
-              ← 리추얼 메인 홈으로 이동하기
+              ← 케어나비 메인 홈으로 이동하기
             </Link>
           </div>
         </section>

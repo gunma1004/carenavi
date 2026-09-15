@@ -1,10 +1,10 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  // 🌐 리추얼 Netlify 공식 도메인
-  const baseUrl = 'https://ritual-therapy.netlify.app';
+  // 🌐 케어나비 Netlify 공식 도메인
+  const baseUrl = 'https://carenavi.netlify.app';
 
-  // 1. 메인 홈 페이지 (스팸/출장 제외 클린 웰니스 플랫폼)
+  // 1. 메인 홈 페이지 (클린 웰니스 플랫폼)
   const mainRoute: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
@@ -28,7 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  // 3. 메인 5개 제휴업체 상세 페이지 (/shop/1 ~ /shop/5)
+  // 3. 메인 제휴업체 상세 페이지 (/shop/1 ~ /shop/5)
   const shopRoutes: MetadataRoute.Sitemap = [1, 2, 3, 4, 5].map((id) => ({
     url: `${baseUrl}/shop/${id}`,
     lastModified: new Date(),
@@ -36,7 +36,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  // 4. 서울·경기·인천 전지역 구·시·군 전체 목록 (출장마사지 핵심 타겟 페이지)
+  // 4. 서울·경기·인천 전지역 구·시·군 전체 목록 (핵심 타겟 페이지)
   const regionList = [
     // ─── 서울특별시 (25개 구) ───
     { region: 'seoul', district: '종로구' },

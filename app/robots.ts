@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = 'https://ritual-therapy.netlify.app';
+  const baseUrl = 'https://carenavi.netlify.app';
 
   return {
     rules: {

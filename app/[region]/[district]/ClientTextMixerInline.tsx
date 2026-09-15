@@ -12,20 +12,20 @@ export function ClientTextMixerInline({ locationText }: { locationText: string }
   }, [locationText]);
 
   return (
-    <div className="relative overflow-hidden bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-amber-500/10 border border-amber-500/30 p-4 md:p-5 rounded-2xl text-center shadow-[0_0_20px_rgba(245,158,11,0.08)]">
-      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/60 border border-amber-500/30 text-[11px] font-bold text-amber-400 mb-2">
+    <div className="relative overflow-hidden bg-gradient-to-r from-sky-500/10 via-sky-500/5 to-sky-500/10 border border-sky-500/30 p-4 md:p-5 rounded-2xl text-center shadow-sm">
+      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-sky-200 text-[11px] font-bold text-sky-700 mb-2 shadow-sm">
         <span className="relative flex h-2 w-2">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
           <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
         </span>
-        실시간 {locationText} 리추얼 테라피스트 대기중
+        실시간 {locationText} 케어나비 테라피스트 대기중
       </div>
 
-      <h2 className="text-sm md:text-base font-extrabold text-amber-300 tracking-tight">
+      <h2 className="text-sm md:text-base font-extrabold text-sky-900 tracking-tight">
         ✨ {headline}
       </h2>
 
-      <p className="text-[11px] md:text-xs text-gray-400 mt-1 font-medium">
+      <p className="text-[11px] md:text-xs text-slate-500 mt-1 font-medium">
         {subText}
       </p>
     </div>

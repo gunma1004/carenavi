@@ -1,103 +1,16 @@
-<!doctype html>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>안심 맞춤 힐링 테라피 예약 | 케어나비</title>
-<meta name="description" content="서울, 경기, 인천 지역의 검증된 프리미엄 힐링 테라피 및 에스테틱 예약 플랫폼.">
-<meta name="robots" content="index,follow">
-<link rel="canonical" href="https://carenavi.netlify.app/">
-<style>
-:root {
-  --p: #2b3a4a; --a: #3182ce; --bg: #f8fafc; --bg2: #fff; --txt: #1e293b;
-  --muted: #64748b; --bdr: #e2e8f0; --shadow: 0 4px 16px rgba(0,0,0,0.05);
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: var(--bg); color: var(--txt); font-family: 'Pretendard', -apple-system, sans-serif; line-height: 1.6; font-size: 15px; }
-a { color: inherit; text-decoration: none; }
-
-/* 헤더 */
-.cn-hd { background: var(--bg2); border-bottom: 1px solid var(--bdr); position: sticky; top: 0; z-index: 100; }
-.cn-hd-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 70px; padding: 0 20px; }
-.cn-logo { display: flex; align-items: center; gap: 10px; }
-.cn-logo-mark { width: 40px; height: 40px; background: var(--a); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 900; font-size: 16px; }
-.cn-logo-text { font-size: 18px; font-weight: 800; color: var(--p); }
-.cn-logo-sub { font-size: 11px; color: var(--muted); }
-
-/* 히어로 */
-.cn-hero { background: linear-gradient(135deg, #ebf8ff 0%, #f8fafc 100%); padding: 60px 20px; text-align: center; border-bottom: 1px solid var(--bdr); }
-.cn-hero h1 { font-size: clamp(26px, 4vw, 42px); font-weight: 900; color: var(--p); margin-bottom: 12px; }
-.cn-hero h1 span { color: var(--a); }
-.cn-hero p { color: var(--muted); font-size: 16px; margin-bottom: 30px; }
-
-/* 지역 탐색 섹션 */
-.cn-sec { max-width: 1200px; margin: 0 auto; padding: 50px 20px; }
-.cn-sec-title { font-size: 22px; font-weight: 800; color: var(--p); margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
-
-/* 시도 탭 */
-.cn-sido-tabs { display: flex; gap: 10px; margin-bottom: 24px; overflow-x: auto; padding-bottom: 5px; }
-.cn-sido-btn { padding: 12px 24px; border: 2px solid var(--bdr); border-radius: 10px; background: var(--bg2); font-weight: 700; color: var(--muted); cursor: pointer; transition: all 0.2s; white-space: nowrap; }
-.cn-sido-btn.active, .cn-sido-btn:hover { border-color: var(--a); color: var(--a); background: #ebf8ff; }
-
-/* 구/군 및 동 그리드 컨테이너 */
-.cn-district-container { display: flex; flex-direction: column; gap: 20px; }
-.cn-district-card { background: var(--bg2); border: 1px solid var(--bdr); border-radius: 12px; padding: 20px; box-shadow: var(--shadow); }
-.cn-district-name { font-size: 17px; font-weight: 800; color: var(--p); margin-bottom: 12px; border-bottom: 2px solid var(--bg); padding-bottom: 8px; }
-.cn-dong-wrap { display: flex; flex-wrap: gap; gap: 8px; }
-.cn-dong-chip { display: inline-flex; align-items: center; padding: 6px 14px; border-radius: 20px; border: 1px solid var(--bdr); background: var(--bg); font-size: 13px; color: var(--txt); transition: all 0.15s; }
-.cn-dong-chip:hover { background: var(--a); color: #fff; border-color: var(--a); }
-
-/* 푸터 */
-.cn-ft { background: #1e293b; color: #94a3b8; padding: 40px 20px; margin-top: 60px; font-size: 13px; }
-.cn-ft-inner { max-width: 1200px; margin: 0 auto; }
-.cn-ft-brand { font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 8px; }
-</style>
-</head>
-<body>
-
-<header class="cn-hd">
-  <div class="cn-hd-inner">
-    <a href="https://carenavi.netlify.app/" class="cn-logo">
-      <div class="cn-logo-mark">CN</div>
-      <div>
-        <div class="cn-logo-text">케어나비</div>
-        <div class="cn-logo-sub">CARENAVI PLATFORM</div>
-      </div>
-    </a>
-  </div>
-</header>
-
-<section class="cn-hero">
-  <h1>수도권 프리미엄 힐링 공간, <span>케어나비</span></h1>
-  <p>서울, 경기, 인천 전 지역의 세부 위치별 제휴 샵 정보를 투명하고 간편하게 찾아보세요.</p>
-</section>
-
-<main class="cn-sec">
-  <h2 class="cn-sec-title">📍 지역별 샵 찾아보기</h2>
-  
-  <!-- 시도 선택 탭 -->
-  <div class="cn-sido-tabs" id="sidoTabs">
-    <button class="cn-sido-btn active" onclick="changeSido('seoul')">서울특별시</button>
-    <button class="cn-sido-btn" onclick="changeSido('gyeonggi')">경기도</button>
-    <button class="cn-sido-btn" onclick="changeSido('incheon')">인천광역시</button>
-  </div>
-
-  <!-- 동적 구/동 리스트 출력 영역 -->
-  <div class="cn-district-container" id="districtContainer"></div>
-</main>
-
-<footer class="cn-ft">
-  <div class="cn-ft-inner">
-    <div class="cn-ft-brand">케어나비 (CareNavi)</div>
-    <p>도메인 주소: https://carenavi.netlify.app/ | 서울·경기·인천 제휴 힐링 플랫폼</p>
-    <p style="margin-top: 10px;">© 2026 CareNavi. All rights reserved.</p>
-  </div>
-</footer>
-
-<script>
-// 요청하신 전체 지역 데이터 연동
-const regionData = {
+export const regionData: Record<
+  string,
+  {
+    name: string;
+    districts: Record<
+      string,
+      {
+        name: string;
+        dongs: string[];
+      }
+    >;
+  }
+> = {
   seoul: {
     name: "서울특별시",
     districts: {
@@ -125,8 +38,8 @@ const regionData = {
       seocho: { name: "서초구", dongs: ["서초1동", "서초2동", "서초3동", "서초4동", "잠원동", "반포본동", "반포1동", "반포2동", "반포3동", "반포4동", "방배본동", "방배1동", "방배2동", "방배3동", "방배4동", "양재1동", "양재2동", "내곡동"] },
       gangnam: { name: "강남구", dongs: ["역삼1동", "역삼2동", "개포1동", "개포2동", "개포4동", "청담동", "삼성1동", "삼성2동", "대치1동", "대치2동", "대치4동", "신사동", "논현1동", "논현2동", "압구정동", "세곡동", "자곡동", "일원동", "수서동", "도곡1동", "도곡2동"] },
       songpa: { name: "송파구", dongs: ["잠실본동", "잠실2동", "잠실3동", "잠실4동", "잠실6동", "잠실7동", "풍납1동", "풍납2동", "거여1동", "거여2동", "마천1동", "마천2동", "방이1동", "방이2동", "오륜동", "오금동", "송파1동", "송파2동", "석촌동", "삼전동", "가락본동", "가락1동", "가락2동", "문정1동", "문정2동", "장지동", "위례동", "잠실동"] },
-      gangdong: { name: "강동구", dongs: ["강일동", "상일1동", "상일2동", "명일1동", "명일2동", "고덕1동", "고덕2동", "암사1동", "암사2동", "암사3동", "천호1동", "천호2동", "천호3동", "성내1동", "성내2동", "성내3동", "둔촌1동", "둔촌2동"] }
-    }
+      gangdong: { name: "강동구", dongs: ["강일동", "상일1동", "상일2동", "명일1동", "명일2동", "고덕1동", "고덕2동", "암사1동", "암사2동", "암사3동", "천호1동", "천호2동", "천호3동", "성내1동", "성내2동", "성내3동", "둔촌1동", "둔촌2동"] },
+    },
   },
   gyeonggi: {
     name: "경기도",
@@ -174,8 +87,8 @@ const regionData = {
       yeoncheon: { name: "연천군", dongs: ["연천읍", "전곡읍", "군남면", "청산면", "백학면", "미산면", "왕징면", "신서면", "중면"] },
       gapyeong: { name: "가평군", dongs: ["가평읍", "설악면", "청평면", "상면", "조종면", "북면"] },
       yangpyeong: { name: "양평군", dongs: ["양평읍", "강상면", "강하면", "양서면", "옥천면", "지평면", "용문면", "개군면"] },
-      gwacheon: { name: "과천시", dongs: ["중앙동", "갈현동", "별양동", "부림동", "원문동", "과천동", "문원동"] }
-    }
+      gwacheon: { name: "과천시", dongs: ["중앙동", "갈현동", "별양동", "부림동", "원문동", "과천동", "문원동"] },
+    },
   },
   incheon: {
     name: "인천광역시",
@@ -189,47 +102,7 @@ const regionData = {
       gyeyang: { name: "계양구", dongs: ["효성1동", "효성2동", "계산1동", "계산2동", "계산3동", "계산4동", "작전1동", "작전2동", "작전서운동", "계양1동", "계양2동", "계양3동"] },
       seogu: { name: "서구", dongs: ["검암경서동", "연희동", "청라1동", "청라2동", "청라3동", "가정1동", "가정2동", "가정3동", "신현원창동", "석남1동", "석남2동", "석남3동", "가좌1동", "가좌2동", "가좌3동", "가좌4동", "검단동", "불로대곡동", "원당동", "당하동", "오류왕길동", "마전동", "아라동"] },
       ganghwa: { name: "강화군", dongs: ["강화읍", "선원면", "불은면", "길상면", "화도면", "양도면", "내가면", "하점면", "양사면", "송해면", "교동면", "삼산면", "서도면"] },
-      ongjin: { name: "옹진군", dongs: ["북도면", "연평면", "백령면", "대청면", "덕적면", "자월면", "영흥면"] }
-    }
-  }
+      ongjin: { name: "옹진군", dongs: ["북도면", "연평면", "백령면", "대청면", "덕적면", "자월면", "영흥면"] },
+    },
+  },
 };
-
-function changeSido(sidoKey) {
-  // 탭 버튼 활성화 변경
-  document.querySelectorAll('.cn-sido-btn').forEach(btn => btn.classList.remove('active'));
-  event.target.classList.add('active');
-
-  const container = document.getElementById('districtContainer');
-  container.innerHTML = '';
-
-  const selectedRegion = regionData[sidoKey];
-  if (!selectedRegion) return;
-
-  // 구/군 루프 생성
-  for (const [districtKey, districtVal] of Object.entries(selectedRegion.districts)) {
-    const card = document.createElement('div');
-    card.className = 'cn-district-card';
-
-    let dongsHtml = '';
-    districtVal.dongs.forEach((dong, index) => {
-      // 요청하신 URL 구조 연동 예시: /시/구/동/shop/1
-      const shopUrl = `/${sidoKey}/${districtKey}/${dong}/shop/1`;
-      dongsHtml += `<a href="${shopUrl}" class="cn-dong-chip">${dong}</a>`;
-    });
-
-    card.innerHTML = `
-      <div class="cn-district-name">${districtVal.name}</div>
-      <div class="cn-dong-wrap">${dongsHtml}</div>
-    `;
-    container.appendChild(card);
-  }
-}
-
-// 초기 로드시 서울 지역 기본 출력
-window.onload = function() {
-  changeSido('seoul');
-};
-</script>
-
-</body>
-</html>
