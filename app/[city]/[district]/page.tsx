@@ -1,102 +1,262 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ClientTextMixerInline } from "@/components/ClientTextMixerInline";
 
 interface PageProps {
   params: Promise<{
     city: string;
     district: string;
   }>;
+  searchParams: Promise<{
+    dong?: string;
+  }>;
 }
 
-// 구별 상세 데이터 샘플
-const districtDetails: Record<string, { name: string; city: string; cityName: string; dongs: string[] }> = {
-  gangnam: { name: "강남구", city: "seoul", cityName: "서울특별시", dongs: ["역삼1동", "역삼2동", "청담동", "삼성1동", "삼성2동", "대치1동", "대치2동", "신사동", "논현1동", "논현2동", "압구정동", "세곡동", "자곡동", "일원동", "수서동", "도곡1동", "도곡2동"] },
-  seocho: { name: "서초구", city: "seoul", cityName: "서울특별시", dongs: ["서초1동", "서초2동", "서초3동", "서초4동", "잠원동", "반포1동", "반포2동", "방배본동", "방배1동", "양재1동", "내곡동"] },
-  mapo: { name: "마포구", city: "seoul", cityName: "서울특별시", dongs: ["공덕동", "아현동", "도화동", "용강동", "대흥동", "염리동", "서교동", "합정동", "망원1동", "연남동", "상암동"] },
-  songpa: { name: "송파구", city: "seoul", cityName: "서울특별시", dongs: ["잠실본동", "잠실2동", "잠실3동", "방이1동", "방이2동", "오금동", "석촌동", "삼전동", "가락1동", "문정1동"] },
-  seongnam_bundang: { name: "성남시 분당구", city: "gyeonggi", cityName: "경기도", dongs: ["분당동", "수내1동", "수내2동", "정자동", "서현1동", "서현2동", "이매1동", "야탑1동", "금곡동", "구미동", "판교동", "백현동"] },
-  namdong: { name: "남동구", city: "incheon", cityName: "인천광역시", dongs: ["구월1동", "구월2동", "구월3동", "간석1동", "간석2동", "만수1동", "만수2동", "서창2동", "논현1동", "논현2동"] }
-};
-
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params, searchParams }: PageProps): Promise<Metadata> {
   const resolvedParams = await params;
-  const dist = districtDetails[resolvedParams.district] || { name: "상세 지역", cityName: "수도권" };
+  const resolvedSearchParams = await searchParams;
+  
+  const { city, district } = resolvedParams;
+  const dongName = resolvedSearchParams.dong ? decodeURIComponent(resolvedSearchParams.dong) : "";
+  const districtName = decodeURIComponent(district);
+  
+  const cityName = city.toLowerCase() === "seoul" ? "서울" : city.toLowerCase() === "incheon" ? "인천" : "경기";
+  const locationKeyword = `${cityName} ${districtName} ${dongName}`.trim();
+
+  // -------------------------------------------------------------
+  // 🎯 30가지 이상의 신뢰도 높고 깔끔한 웰니스 테라피 타이틀 순환 풀
+  // -------------------------------------------------------------
+  const charSum = (locationKeyword + dongName + districtName + "carenavi_clean_split").split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  const variantIndex = charSum % 30;
+
+  const titleVariants = [
+    /* 0 */ `${locationKeyword} 프리미엄 힐링 테라피 & 에스테틱 안내 - 케어나비`,
+    /* 1 */ `${locationKeyword} 맞춤형 바디케어 프로그램 및 제휴 샵 안내`,
+    /* 2 */ `[케어나비] ${locationKeyword} 전문 웰니스 테라피 가이드`,
+    /* 3 */ `${locationKeyword} 편안한 휴식 공간, 릴렉싱 케어 정보`,
+    /* 4 */ `${locationKeyword} 프라이빗 맞춤 테라피 제휴처 모음`,
+    /* 5 */ `${locationKeyword} 전신 피로회복 힐링 테라피 안내`,
+    /* 6 */ `[케어나비] ${locationKeyword} 쾌적한 방문 바디케어 서비스`,
+    /* 7 */ `${locationKeyword} 프리미엄 아로마 및 스웨디시 제휴 샵`,
+    /* 8 */ `${locationKeyword} 웰니스 프로그램 요금 및 코스 안내`,
+    /* 9 */ `${locationKeyword} 베테랑 테라피스트 1:1 맞춤 케어`,
+    /* 10 */ `케어나비 | ${locationKeyword} 안심 힐링 테라피 공간`,
+    /* 11 */ `${locationKeyword} 릴렉싱 바디케어 및 스파 프로그램`,
+    /* 12 */ `${locationKeyword} 도심 속 힐링, 프리미엄 방문 테라피`,
+    /* 13 */ `${locationKeyword} 맞춤형 정통 테라피 제휴 샵 정보`,
+    /* 14 */ `[추천 제휴] ${locationKeyword} 웰니스 케어 가이드`,
+    /* 15 */ `${locationKeyword} 심신 안정을 위한 힐링 테라피 안내`,
+    /* 16 */ `${locationKeyword} 전문 에스테틱 및 바디케어 프로그램`,
+    /* 17 */ `${locationKeyword} 1:1 맞춤형 컨디션 회복 테라피`,
+    /* 18 */ `${locationKeyword} 쾌적하고 아늑한 휴식 테라피 정보`,
+    /* 19 */ `케어나비 ${locationKeyword} 프리미엄 테라피 안내`,
+    /* 20 */ `${locationKeyword} 전신 순환 및 릴렉스 바디케어 제휴`,
+    /* 21 */ `${locationKeyword} 맞춤형 감성 테라피 및 힐링 프로그램`,
+    /* 22 */ `[공식 제휴] ${locationKeyword} 안심 방문 케어 가이드`,
+    /* 23 */ `${locationKeyword} 프리미엄 힐링 테라피 코스 비교`,
+    /* 24 */ `${locationKeyword} 컨디션 맞춤형 바디케어 요금표`,
+    /* 25 */ `${locationKeyword} 전문 웰니스 샵 제휴 정보 - 케어나비`,
+    /* 26 */ `${locationKeyword} 릴렉싱 아로마 테라피 프로그램`,
+    /* 27 */ `케어나비 추천 ${locationKeyword} 맞춤 힐링 케어`,
+    /* 28 */ `${locationKeyword} 편안한 휴식을 위한 전문 바디케어`,
+    /* 29 */ `${locationKeyword} 최종 웰니스 테라피 제휴 가이드`
+  ];
+
+  const descriptionVariants = [
+    /* 0 */ `${locationKeyword} 지역 프리미엄 힐링 테라피 및 에스테틱 제휴 샵 안내. 투명한 가격과 쾌적한 휴식 공간 정보를 케어나비에서 확인하세요.`,
+    /* 1 */ `${locationKeyword} 맞춤형 바디케어 프로그램 안내. 지친 일상 속 편안한 휴식과 피로 회복을 돕는 전문 제휴처 정보를 제공합니다.`,
+    /* 2 */ `엄선된 ${locationKeyword} 웰니스 테라피 가이드. 투명하고 정직한 정찰제 운영으로 편안하고 쾌적한 휴식을 누려보세요.`,
+    /* 3 */ `${locationKeyword} 편안한 휴식 공간과 릴렉싱 케어 정보. 숙련된 테라피스트의 1:1 맞춤 프로그램을 안내해 드립니다.`,
+    /* 4 */ `${locationKeyword} 프라이빗 맞춤 테라피 제휴 샵 모음. 신뢰할 수 있는 시설과 품격 있는 서비스를 비교해 보세요.`,
+    /* 5 */ `${locationKeyword} 전신 피로회복 힐링 테라피 안내. 뭉친 근육을 부드럽게 이완하는 전문 바디케어 프로그램입니다.`,
+    /* 6 */ `쾌적한 ${locationKeyword} 방문 바디케어 서비스 제휴 정보. 투명한 프로그램 구성과 친절한 안내를 만나보세요.`,
+    /* 7 */ `${locationKeyword} 프리미엄 아로마 및 스웨디시 제휴 샵 정보. 심신 안정을 돕는 고품격 테라피를 확인하세요.`,
+    /* 8 */ `${locationKeyword} 웰니스 프로그램 요금 및 코스 안내. 합리적이고 투명한 정찰제로 안심하고 이용하실 수 있습니다.`,
+    /* 9 */ `베테랑 테라피스트의 ${locationKeyword} 1:1 맞춤 케어. 개인별 컨디션에 맞춘 최적의 힐링 솔루션을 제공합니다.`,
+    /* 10 */ `케어나비가 엄선한 ${locationKeyword} 안심 힐링 테라피 공간. 위생적이고 아늑한 제휴 샵 정보를 전해드립니다.`,
+    /* 11 */ `${locationKeyword} 릴렉싱 바디케어 및 스파 프로그램 안내. 일상의 스트레스를 편안하게 비워내 보세요.`,
+    /* 12 */ `${locationKeyword} 프리미엄 방문 테라피 가이드. 익숙한 공간에서 온전한 휴식과 재충전을 누려보세요.`,
+    /* 13 */ `${locationKeyword} 맞춤형 정통 테라피 제휴 샵 정보. 엄선된 파트너들의 전문적인 케어 서비스를 확인하세요.`,
+    /* 14 */ `신뢰할 수 있는 ${locationKeyword} 웰니스 케어 가이드. 투명한 정보 제공으로 편안한 선택을 도와드립니다.`,
+    /* 15 */ `${locationKeyword} 심신 안정을 위한 힐링 테라피 안내. 부드러운 이완과 웰빙을 위한 맞춤 프로그램.`,
+    /* 16 */ `전문 에스테틱 및 바디케어 프로그램 안내. ${locationKeyword} 지역 우수 제휴 샵의 상세 정보를 확인하세요.`,
+    /* 17 */ `${locationKeyword} 1:1 맞춤형 컨디션 회복 테라피. 정성스러운 케어로 활기찬 일상을 되찾아보세요.`,
+    /* 18 */ `${locationKeyword} 쾌적하고 아늑한 휴식 테라피 정보. 세심하고 품격 있는 바디케어 제휴처 안내.`,
+    /* 19 */ `케어나비 ${locationKeyword} 프리미엄 테라피 안내. 고객 만족도가 검증된 우수 제휴 샵 리스트입니다.`,
+    /* 20 */ `${locationKeyword} 전신 순환 및 릴렉스 바디케어 제휴 정보. 건강한 활력을 선사하는 웰니스 프로그램.`,
+    /* 21 */ `${locationKeyword} 맞춤형 감성 테라피 및 힐링 프로그램. 마음까지 편안해지는 휴식을 경험해 보세요.`,
+    /* 22 */ `공식 제휴된 ${locationKeyword} 안심 방문 케어 가이드. 투명하고 정직한 운영 시스템을 약속드립니다.`,
+    /* 23 */ `${locationKeyword} 프리미엄 힐링 테라피 코스 비교. 내 몸에 꼭 맞는 프로그램과 가격 정보를 살펴보세요.`,
+    /* 24 */ `${locationKeyword} 컨디션 맞춤형 바디케어 요금표 안내. 투명한 정찰제로 신뢰를 더합니다.`,
+    /* 25 */ `전문 웰니스 샵 제휴 정보 - 케어나비. ${locationKeyword} 주민 여러분을 위한 힐링 가이드.`,
+    /* 26 */ `${locationKeyword} 릴렉싱 아로마 테라피 프로그램. 고급 오일과 함께하는 깊은 이완의 시간.`,
+    /* 27 */ `케어나비 추천 ${locationKeyword} 맞춤 힐링 케어. 엄선된 제휴처에서 품격 있는 휴식을 누려보세요.`,
+    /* 28 */ `${locationKeyword} 편안한 휴식을 위한 전문 바디케어. 몸과 마음의 피로를 부드럽게 씻어내 드립니다.`,
+    /* 29 */ `${locationKeyword} 최종 웰니스 테라피 제휴 가이드. 케어나비가 보증하는 안전하고 쾌적한 휴식 공간 정보.`
+  ];
+
+  const finalTitle = titleVariants[variantIndex];
+  const finalDescription = descriptionVariants[variantIndex];
 
   return {
-    title: `${dist.cityName} ${dist.name} 출장 마사지·홈타이 지역별 안내 | 케어나비`,
-    description: `${dist.cityName} ${dist.name} 전 지역 100% 후불제 안심 방문 테라피 제휴 샵 정보 및 코스 가격 안내.`,
+    title: finalTitle,
+    description: finalDescription,
     alternates: {
-      canonical: `https://carenavi.netlify.app/${resolvedParams.city}/${resolvedParams.district}/`,
+      canonical: `https://carenavi.netlify.app/${city}/${encodeURIComponent(districtName)}${dongName ? `?dong=${encodeURIComponent(dongName)}` : ""}`,
+    },
+    openGraph: {
+      title: finalTitle,
+      description: finalDescription,
+      url: `https://carenavi.netlify.app/${city}/${encodeURIComponent(districtName)}${dongName ? `?dong=${encodeURIComponent(dongName)}` : ""}`,
+      siteName: "케어나비 (CareNavi)",
+      locale: "ko_KR",
+      type: "website",
+      images: [
+        {
+          url: "/og-main.png",
+          width: 1200,
+          height: 630,
+          alt: `${locationKeyword} 케어나비 힐링 플랫폼`,
+        },
+      ],
     },
   };
 }
 
-export default async function DistrictPage({ params }: PageProps) {
+export default async function RegionalDetailPage({ params, searchParams }: PageProps) {
   const resolvedParams = await params;
+  const resolvedSearchParams = await searchParams;
+
   const { city, district } = resolvedParams;
-  const dist = districtDetails[district] || { name: "상세 지역", cityName: "수도권", dongs: ["중심가1동", "중심가2동"] };
+  const dongName = resolvedSearchParams.dong ? decodeURIComponent(resolvedSearchParams.dong) : "";
+  const districtName = decodeURIComponent(district);
+  const cityName = city.toLowerCase() === "seoul" ? "서울특별시" : city.toLowerCase() === "incheon" ? "인천광역시" : "경기도";
+  
+  const fullTitle = dongName 
+    ? `${cityName} ${districtName} (${dongName})` 
+    : `${cityName} ${districtName}`;
+
+  const localShops = [
+    {
+      id: 1,
+      name: `✨ ${fullTitle} 제휴 한국골든테라피`,
+      desc: "고품격 릴렉싱 & 딥티슈 피로회복! 전문 테라피스트의 품격 있는 1:1 맞춤 케어",
+      phone: "0507-1280-3361",
+      price: "맞춤 코스별 상이",
+      image: "/shop1.jpg"
+    },
+    {
+      id: 2,
+      name: `🌸 ${fullTitle} 제휴 한국미인테라피`,
+      desc: "최고급 천연 오일을 활용한 감성 아로마 전신 바디케어 프로그램",
+      phone: "0507-1280-3303",
+      price: "맞춤 코스별 상이",
+      image: "/shop2.jpg"
+    },
+    {
+      id: 3,
+      name: `💎 ${fullTitle} 제휴 주주테라피`,
+      desc: "재방문율 높은 만족도! 철저한 위생 관리와 프라이빗 힐링 바디케어 서비스 제공",
+      phone: "0507-1280-3193",
+      price: "맞춤 코스별 상이",
+      image: "/shop3.jpg"
+    },
+    {
+      id: 4,
+      name: `👑 ${fullTitle} 제휴 퀸즈홈테라피`,
+      desc: "품격 있게 누리는 홈케어! 전문 힐러들의 체형 맞춤형 피로회복 특화 프로그램",
+      phone: "0507-1280-3334",
+      price: "맞춤 코스별 상이",
+      image: "/shop4.jpg"
+    },
+    {
+      id: 5,
+      name: `🌙 ${fullTitle} 제휴 오늘밤테라피`,
+      desc: "엄선된 우수 제휴점! 수도권 전지역 쾌적하고 편안한 방문 힐링",
+      phone: "0507-1280-3223",
+      price: "맞춤 코스별 상이",
+      image: "/shop5.jpg"
+    }
+  ];
+
+  const jsonLd = {
+    @context: "https://schema.org",
+    @type: "LocalBusiness",
+    name: `${fullTitle} 힐링 테라피 & 제휴 샵 안내 - 케어나비`,
+    description: `${fullTitle} 지역 프리미엄 테라피 및 에스테틱 제휴업체 정보 제공`,
+    url: `https://carenavi.netlify.app/${city}/${encodeURIComponent(districtName)}`,
+    telephone: "0507-1280-3344",
+    address: {
+      @type: "PostalAddress",
+      addressLocality: districtName,
+      addressRegion: cityName,
+      addressCountry: "KR"
+    }
+  };
 
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-800 pb-20">
-      <header className="bg-white border-b border-slate-200 sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-          <Link href="/" className="text-xl font-bold text-sky-600">
-            케어나비 (CareNavi)
-          </Link>
-          <Link href={`/${city}`} className="text-sm text-slate-500 hover:text-slate-800">
-            &larr; {dist.cityName} 목록으로
-          </Link>
-        </div>
-      </header>
+    <div className="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans selection:bg-sky-500 selection:text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
 
-      <nav className="bg-white border-b border-slate-200 py-3 px-4 text-xs text-slate-500">
-        <div className="max-w-6xl mx-auto flex items-center gap-2">
-          <Link href="/" className="text-sky-600 hover:underline">홈</Link>
-          <span>&gt;</span>
-          <Link href={`/${city}`} className="text-sky-600 hover:underline">{dist.cityName}</Link>
-          <span>&gt;</span>
-          <span className="text-slate-900 font-bold">{dist.name}</span>
-        </div>
-      </nav>
-
-      <section className="max-w-4xl mx-auto py-10 px-4">
-        <div className="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm space-y-6">
-          <div>
-            <span className="bg-sky-100 text-sky-700 text-xs font-semibold px-2.5 py-1 rounded-md mb-2 inline-block">
-              {dist.cityName} {dist.name} 전담 방문 케어
+      <main className="max-w-4xl mx-auto px-4 py-8 w-full flex-1 space-y-12">
+        <section className="relative rounded-3xl overflow-hidden border border-slate-200 shadow-sm bg-gradient-to-b from-slate-900 to-slate-800">
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent flex flex-col justify-end p-6 md:p-8">
+            <span className="text-sky-400 text-xs font-black tracking-widest uppercase mb-1">
+              {cityName.toUpperCase()} · LOCAL HEALING GUIDE
             </span>
-            <h1 className="text-2xl md:text-3xl font-black text-slate-900 mb-2">
-              {dist.name} 출장 마사지 · 홈타이 지역별 안내
+            <h1 className="text-2xl md:text-4xl font-black text-white drop-shadow-sm">
+              {fullTitle} 프리미엄 힐링 테라피 안내
             </h1>
-            <p className="text-slate-600 text-sm md:text-base leading-relaxed">
-              {dist.cityName} {dist.name} 전 지역에서 100% 후불제로 안전하게 이용하실 수 있는 프리미엄 힐링 테라피 제휴 샵 안내입니다. 원하시는 동을 선택하여 상세 코스와 가격을 확인하세요.
+            <p className="text-xs md:text-sm text-slate-300 mt-2 max-w-xl leading-relaxed">
+              {fullTitle} 고객님을 위한 엄선된 테라피 및 에스테틱 제휴 샵 안내입니다. 검증된 프로그램과 투명한 정보를 확인해 보세요.
             </p>
           </div>
+        </section>
 
-          <div className="bg-sky-50 border border-sky-100 p-4 rounded-2xl text-xs md:text-sm text-sky-900 font-medium">
-            💰 <strong>{dist.name} 기준 안내:</strong> 건식/타이 6만원부터 · 아로마/스웨디시 7만원부터 투명하게 제공됩니다.
-          </div>
+        <ClientTextMixerInline locationText={fullTitle} />
 
-          <div>
-            <h2 className="text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-sky-600"></span>
-              {dist.name} 세부 동별 샵 바로가기
+        <section className="space-y-6">
+          <div className="text-center">
+            <p className="text-xs text-sky-600 font-bold tracking-widest uppercase">RECOMMENDED PARTNERS</p>
+            <h2 className="text-xl md:text-2xl font-black text-slate-900 mt-1">
+              {fullTitle} 추천 제휴 샵 (총 5곳)
             </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5">
-              {dist.dongs.map((dong, idx) => (
-                <Link
-                  key={idx}
-                  href={`/${city}/${district}/${dong}/shop/1`}
-                  className="p-3 bg-slate-50 hover:bg-sky-50 border border-slate-200 hover:border-sky-300 rounded-2xl text-center transition group"
-                >
-                  <strong className="block text-sm font-extrabold text-slate-900 group-hover:text-sky-600">{dong}</strong>
-                  <span className="text-[11px] text-slate-500">예약 및 가격 보기</span>
-                </Link>
-              ))}
-            </div>
           </div>
-        </div>
-      </section>
-    </main>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {localShops.map((lShop) => (
+              <div key={lShop.id} className="bg-white border border-slate-200 hover:border-sky-300 rounded-2xl p-4 flex gap-4 items-center shadow-sm transition-all group relative">
+                <Link href={`/${city}/${district}/${dongName || 'default'}/shop/${lShop.id}`} className="absolute inset-0 z-10" aria-label={`${lShop.name} 상세페이지 보기`} />
+                <img 
+                  src={lShop.image} 
+                  alt={lShop.name} 
+                  className="w-20 h-20 md:w-24 md:h-24 rounded-xl object-cover border border-slate-100 group-hover:scale-105 transition-transform" 
+                />
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-extrabold text-sm md:text-base text-slate-900 truncate group-hover:text-sky-600 transition-colors">
+                    {lShop.name}
+                  </h3>
+                  <p className="text-[11px] text-slate-500 mt-1 line-clamp-2">
+                    {lShop.desc}
+                  </p>
+                  <div className="mt-2.5 flex items-center justify-between">
+                    <span className="text-xs font-black text-sky-600">{lShop.price}</span>
+                    <a 
+                      href={`tel:${lShop.phone}`} 
+                      className="bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs px-3.5 py-1.5 rounded-xl shadow-sm transition-all transform active:scale-95 relative z-20"
+                    >
+                      전화문의
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      </main>
+    </div>
   );
 }
