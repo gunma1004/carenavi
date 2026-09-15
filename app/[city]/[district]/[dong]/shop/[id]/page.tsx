@@ -388,19 +388,19 @@ export default async function ShopDetailPage({ params }: PageProps) {
   const displayShopTitle = `${locationPrefix} 출장 타이 마사지 · 출장 아로마 마사지 - ${shop.name}`;
 
   const jsonLd = {
-    @context: "https://schema.org",
-    @type: "HealthAndBeautyBusiness",
-    name: displayShopTitle,
-    description: shop.desc,
-    telephone: shop.phone,
-    url: `https://carenavi.netlify.app/${city}/${district}/${dong}/shop/${id}`,
-    image: `https://carenavi.netlify.app${shop.image}`,
-    address: {
-      @type: "PostalAddress",
-      addressRegion: locationPrefix,
-      addressCountry: "KR"
+    "@context": "https://schema.org",
+    "@type": "HealthAndBeautyBusiness",
+    "name": displayShopTitle,
+    "description": shop.desc,
+    "telephone": shop.phone,
+    "url": `https://carenavi.netlify.app/${city}/${district}/${dong}/shop/${id}`,
+    "image": `https://carenavi.netlify.app${shop.image}`,
+    "address": {
+      "@type": "PostalAddress",
+      "addressRegion": locationPrefix,
+      "addressCountry": "KR"
     },
-    priceRange: "$$"
+    "priceRange": "$$"
   };
 
   return (

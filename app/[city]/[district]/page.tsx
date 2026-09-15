@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ClientTextMixerInline } from "@/components/ClientTextMixerInline";
+import { ClientTextMixerInline } from "../../ClientTextMixerInline";
 
 interface PageProps {
   params: Promise<{
