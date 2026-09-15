@@ -10,6 +10,22 @@ interface PageProps {
   }>;
 }
 
+// 구 코드 영문을 한글로 변환하는 맵핑 사전
+const districtNameMap: Record<string, string> = {
+  // 서울
+  jongno: "종로구", jung: "중구", yongsan: "용산구", seongdong: "성동구", gwangjin: "광진구",
+  dongdaemun: "동대문구", jungnang: "중랑구", seongbuk: "성북구", gangbuk: "강북구", dobong: "도봉구",
+  nowon: "노원구", eunpyeong: "은평구", seodaemun: "서대문구", mapo: "마포구", yangcheon: "양천구",
+  gangseo: "강서구", guro: "구로구", geumcheon: "금천구", yeongdeungpo: "영등포구", 동작구: "동작구",
+  dongjak: "동작구", gwanak: "관악구", seocho: "서초구", gangnam: "강남구", songpa: "송파구", gangdong: "강동구",
+  // 경기 / 인천 주요 구
+  suwon_jangan: "수원시 장안구", suwon_gwonseon: "수원시 권선구", suwon_paldal: "수원시 팔달구", suwon_yeongtong: "수원시 영통구",
+  seongnam_sujeong: "성남시 수정구", seongnam_jungwon: "성남시 중원구", seongnam_bundang: "성남시 분당구",
+  goyang_deogyang: "고양시 덕양구", goyang_ilsandong: "고양시 일산동구", goyang_ilsanseo: "고양시 일산서구",
+  yongin_cheoin: "용인시 처인구",용인시기흥구: "용인시 기흥구", yongin_giheung: "용인시 기흥구", yongin_suji: "용인시 수지구",
+  michuhol: "미추홀구", yeonsu: "연수구", namdong: "남동구", bupyeong: "부평구", gyeyang: "계양구", seogu: "서구"
+};
+
 const shopDatabase: Record<string, {
   name: string;
   phone: string;
@@ -166,7 +182,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { city, district, dong, id } = resolvedParams;
   
   const cityName = city.toLowerCase() === "seoul" ? "서울" : city.toLowerCase() === "incheon" ? "인천" : "경기";
-  const districtName = decodeURIComponent(district);
+  const decodedDistrict = decodeURIComponent(district);
+  const districtName = districtNameMap[decodedDistrict.toLowerCase()] || decodedDistrict;
   const dongName = decodeURIComponent(dong);
   const shop = shopDatabase[id] || shopDatabase["1"];
   
@@ -266,7 +283,8 @@ export default async function DongShopDetailPage({ params }: PageProps) {
   const { city, district, dong, id } = resolvedParams;
 
   const cityName = city.toLowerCase() === "seoul" ? "서울" : city.toLowerCase() === "incheon" ? "인천" : "경기";
-  const districtName = decodeURIComponent(district);
+  const decodedDistrict = decodeURIComponent(district);
+  const districtName = districtNameMap[decodedDistrict.toLowerCase()] || decodedDistrict;
   const dongName = decodeURIComponent(dong);
   const shop = shopDatabase[id] || shopDatabase["1"];
 
