@@ -179,18 +179,18 @@ export default async function RegionalDetailPage({ params, searchParams }: PageP
     }
   ];
 
-  const jsonLd = {
-    @context: "https://schema.org",
-    @type: "LocalBusiness",
-    name: `${fullTitle} 힐링 테라피 & 제휴 샵 안내 - 케어나비`,
-    description: `${fullTitle} 지역 프리미엄 테라피 및 에스테틱 제휴업체 정보 제공`,
-    url: `https://carenavi.netlify.app/${city}/${encodeURIComponent(districtName)}`,
-    telephone: "0507-1280-3344",
-    address: {
-      @type: "PostalAddress",
-      addressLocality: districtName,
-      addressRegion: cityName,
-      addressCountry: "KR"
+ const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": `${fullTitle} 힐링 테라피 & 제휴 샵 안내 - 케어나비`,
+    "description": `${fullTitle} 지역 프리미엄 테라피 및 에스테틱 제휴업체 정보 제공`,
+    "url": `https://carenavi.netlify.app/${city}/${encodeURIComponent(districtName)}`,
+    "telephone": "0507-1280-3344",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": districtName,
+      "addressRegion": cityName,
+      "addressCountry": "KR"
     }
   };
 
