@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 
-// 전체 지역 데이터
+// 전체 지역 데이터 (인천 최신 행정체제 개편 2군 9구 체제 반영 완료)
 const regionData: Record<string, { name: string; districts: Record<string, { name: string; dongs: string[] }> }> = {
   seoul: {
     name: "서울특별시",
@@ -52,12 +52,14 @@ const regionData: Record<string, { name: string; districts: Record<string, { nam
   incheon: {
     name: "인천광역시",
     districts: {
-      junggu: { name: "중구", dongs: ["신포동", "신흥동", "동인천동", "영종동", "운서동"] },
+      jemulpo: { name: "제물포구", dongs: ["신포동", "신흥동", "동인천동", "개항동", "도원동", "율목동", "연안동"] },
+      yeongjong: { name: "영종구", dongs: ["영종동", "운서동", "용유동", "영종1동", "영종2동"] },
       michuhol: { name: "미추홀구", dongs: ["숭의동", "용현동", "학익동", "도화동", "주안동", "관교동", "문학동"] },
       yeonsu: { name: "연수구", dongs: ["옥련동", "선학동", "연수동", "청학동", "동춘동", "송도동"] },
       namdong: { name: "남동구", dongs: ["구월동", "간석동", "만수동", "서창동", "논현동"] },
       bupyeong: { name: "부평구", dongs: ["부평동", "산곡동", "청천동", "갈산동", "삼산동", "부개동"] },
-      seogu: { name: "서구", dongs: ["연희동", "가정동", "석남동", "청라동", "검단동", "아라동"] }
+      seohae: { name: "서해구", dongs: ["가정동", "석남동", "청라동", "검암경서동", "신현원창동", "가좌동"] },
+      geomdan: { name: "검단구", dongs: ["검단동", "당하동", "마전동", "불로대곡동", "오류왕길동", "원당동", "아라동"] }
     }
   }
 };
