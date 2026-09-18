@@ -9,32 +9,63 @@ interface PageProps {
   }>;
 }
 
-// 🌟 출장을 완전히 배제한 순수 마사지 수식어 풀 (간결하고 임팩트 있는 형태, 40개)
-const districtModifiers = [
-  '전문 힐링 마사지', '프라이빗 맞춤 마사지', '웰니스 바디 마사지', '스웨디시 감성 마사지',
-  '아로마 오일 마사지', '럭셔리 스파 마사지', 'VIP 프리미엄 마사지', '소프트 릴렉스 마사지',
-  '딥티슈 바디 마사지', '스페셜 힐링 마사지', '피로회복 전신 마사지', '맞춤형 스웨디시 마사지',
-  '실속형 바디 마사지', '종합 웰니스 마사지', '최고급 감성 마사지', '전문 바디케어 마사지',
-  '맞춤 테라피 마사지', '1:1 프라이빗 마사지', '정통 스웨디시 마사지', '스페셜 아로마 마사지',
-  '시원한 전신 마사지', '편안한 릴렉스 마사지', '고품격 테라피 마사지', '전문 아로마 마사지',
-  '스웨디시 테라피 마사지', '딥티슈 힐링 마사지', '웰니스 스파 마사지', '정통 바디 마사지',
-  '쾌적한 힐링 마사지', '종합 테라피 마사지', '최고급 바디 마사지', '전문 릴렉싱 마사지',
-  '활력 충전 마사지', '근육이완 테라피 마사지', '바디 밸런스 마사지', '토탈 리프레시 마사지',
-  '프라임 케어 마사지', '로얄 릴렉스 마사지', '시그니처 바디 마사지', '컴포트 힐링 마사지'
+const SITE_URL = "https://carenavi.netlify.app";
+
+// 🌟 1단: '출장'을 배제한 수식어 풀 (35개)
+const prefixAdjectives = [
+  "소프트", "프리미엄", "릴렉스", "감성", "프라이빗",
+  "스페셜", "힐링", "딥티슈", "명품", "맞춤형",
+  "안심", "쾌적한", "정성", "토탈", "순환",
+  "포근한", "전신", "실속형", "프로페셔널", "럭셔리",
+  "시그니처", "활력", "바디케어", "클래식", "컴포트",
+  "디톡스", "정통", "체형맞춤", "차분한", "피로해소",
+  "노련한", "깔끔한", "산뜻한", "탁월한", "안락한"
 ];
 
-// 🌟 상세 설명 풀 (30개)
-const districtDescriptions = [
-  '검증된 전문 샵 정보와 체계적인 프로그램으로 지친 피로를 풀어드립니다.',
-  '선입금 없는 안전한 시스템과 투명한 정찰제로 편안한 휴식을 선사합니다.',
-  '엄선된 전문 관리사의 섬세한 손길로 최상의 마사지 힐링을 누려보세요.',
-  '향기로운 아로마와 부드러운 터치로 나만의 프라이빗한 휴식을 선사합니다.',
-  '일상에 지친 몸과 마음에 활력을 불어넣어 주는 맞춤형 테라피 안내.',
-  '깊은 근육까지 시원하게 이완시켜 주는 전문 바디케어 서비스를 만나보세요.',
-  '철저한 위생 관리와 고객 만족 중심의 고품격 프로그램을 제공합니다.',
-  '빠르고 편리한 정보 확인으로 언제 어디서나 편안한 휴식을 누리세요.',
-  '부드러운 오일과 정성 어린 터칭으로 깊은 안정감을 드립니다.',
-  '피로와 스트레스를 말끔히 해소해 주는 프리미엄 바디 릴렉스 가이드.'
+// 🌟 1단: '마사지' 앞에 붙는 코스 테크닉 풀 (16개)
+const coreTechniques = [
+  "스웨디시", "아로마", "타이", "바디",
+  "릴렉싱", "테라피", "웰니스", "홈케어",
+  "림프케어", "컨디셔닝", "스트레칭", "이완",
+  "에스테틱", "오일", "건식", "감성케어"
+];
+
+// 🌟 2단: '안마'를 완전히 배제한 방문 케어·테라피·예약 연계 풀 (50개)
+const secondaryActions = [
+  "전지역 실시간 방문예약", "테라피 코스 예약", "힐링 테라피 추천예약", "바디케어 코스예약",
+  "웰니스 케어 방문안내", "구·동 전지역 방문안내", "스웨디시 통합예약", "안심 방문케어 안내",
+  "맞춤 테라피 예약", "전신 릴렉스 케어예약", "홈케어 실시간 빠른예약", "힐링 바디 프로그램",
+  "전문 테라피 1:1 예약", "바디 관리 코스안내", "프리미엄 테라피 예약", "쾌적한 방문케어 접수",
+  "야간 힐링 실시간예약", "명품 에스테틱 코스안내", "감성 테라피 예약", "당일 1:1 방문예약",
+  "정찰제 테라피 예약안내", "후불제 안심 코스접수", "전신 릴렉싱 케어안내", "전문 힐러진 추천예약",
+  "피로회복 웰니스 예약", "토탈 바디케어 방문예약", "심야 힐링 방문안내", "스파 테라피 코스예약",
+  "1:1 프라이빗 케어예약", "순환 림프 테라피안내", "체형맞춤 케어 코스예약", "아로마 바디 방문예약",
+  "정통 테라피 실시간예약", "VIP 힐링 코스접수", "안심방문 테라피 예약", "바디 밸런스 케어안내",
+  "도심 속 힐링 방문안내", "프라이빗 테라피 예약", "신속 홈케어 방문예약", "동네 안심 테라피안내",
+  "우리동네 힐링케어 예약", "실속 바디 프로그램안내", "클래식 테라피 예약", "집중 이완 케어예약",
+  "데일리 리프레시 방문접수", "맞춤형 바디케어 예약", "디톡스 테라피 코스예약", "럭셔리 힐링 방문안내",
+  "대표 에스테틱 프로그램예약", "온전한 휴식 힐링안내"
+];
+
+// 🌟 3단: 지역 안내 페이지 전용 소구 문구 풀 (8개)
+const tertiaryActionPatterns = [
+  "1:1 맞춤 방문케어", "프라이빗 힐링 안내", "전신 피로회복 총정리",
+  "정직한 정찰제 안심 가이드", "당일 예약 맞춤 코스", "최고급 힐러진 프로그램",
+  "안심 후불제 웰니스 안내", "전신 릴렉스 힐링 추천"
+];
+
+// 🌟 디스크립션 가격 및 소구점 조합 풀 (10개)
+const priceHooks = [
+  "건식 6만원부터 심야할증 없이 방문합니다.",
+  "건식 7만원부터 추가비용 없이 신속하게 방문합니다.",
+  "스웨디시 8만원부터 투명한 정찰제로 방문합니다.",
+  "아로마 7만원부터 합리적인 요금으로 방문합니다.",
+  "타이 6만원부터 현장 결제 안심 후불제로 방문합니다.",
+  "기본 코스 6만원부터 선입금 없이 안전하게 방문합니다.",
+  "전신 코스 7만원부터 심야할증 없는 가격으로 방문합니다.",
+  "힐링 코스 8만원부터 정직한 정찰제로 방문합니다.",
+  "맞춤 코스 7만원부터 투명한 후불제로 방문합니다.",
+  "스페셜 코스 9만원부터 추가요금 없이 바로 방문합니다."
 ];
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -48,29 +79,49 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const districtName = districtInfo ? districtInfo.name : district;
   const locationKeyword = `${cityName} ${districtName}`;
 
-  // 🌟 순차적 인덱스 계산 (출장 완전 배제, 고유성 보장, 겹침 원천 차단)
-  const seed = `${locationKeyword}-district-pure-seo`;
-  const charSum = seed.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  // 🌟 순차적 인덱스 계산 (출장/안마 배제, 35x16x50 고유 조합 보장)
+  const seed = `${locationKeyword}-carenavi-district-clean-v3`;
+  const charSum = seed.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0);
   
-  const modIdx = charSum % districtModifiers.length;
-  const descIdx = (charSum * 7) % districtDescriptions.length;
+  const adjIdx = charSum % prefixAdjectives.length;
+  const techIdx = (charSum * 3) % coreTechniques.length;
+  const actionIdx = (charSum * 5) % secondaryActions.length;
+  const tertiaryIdx = (charSum * 7) % tertiaryActionPatterns.length;
+  const priceIdx = (charSum * 11) % priceHooks.length;
 
-  // 💡 사이트명과 샵 이름 배제, 짧고 간결한 타이틀 ([지역] [수식어 마사지])
-  const finalTitle = `${locationKeyword} ${districtModifiers[modIdx]}`;
-  const finalDescription = `${locationKeyword} 마사지 샵 정보. ${districtDescriptions[descIdx]}`;
+  const selectedAdj = prefixAdjectives[adjIdx];
+  const selectedTech = coreTechniques[techIdx];
+  const selectedAction = secondaryActions[actionIdx];
+  const selectedTertiary = tertiaryActionPatterns[tertiaryIdx];
+  const selectedPriceHook = priceHooks[priceIdx];
+
+  // 💡 [구] [수식어] [코스] 마사지·홈타이 | [시] [2단 예약] | [3단 소구점] (약 45~50자)
+  const finalTitle = `${districtName} ${selectedAdj} ${selectedTech} 마사지·홈타이 | ${cityName} ${selectedAction} | ${selectedTertiary}`;
+  
+  // 💡 [시 구] 전지역 전문 방문 케어. 엄선된 테라피스트 100% 후불제 마사지·홈타이 안내. [가격 훅]
+  const finalDescription = `${locationKeyword} 전지역 전문 방문 케어. 엄선된 테라피스트 100% 후불제 마사지·홈타이 안내. ${selectedPriceHook}`;
 
   return {
+    metadataBase: new URL(SITE_URL),
     title: {
       absolute: finalTitle,
     },
     description: finalDescription,
     alternates: {
-      canonical: `https://carenavi.netlify.app/${city}/${district}`,
+      canonical: `${SITE_URL}/${city}/${district}`,
     },
+    keywords: [
+      `${locationKeyword} 마사지`,
+      `${districtName} 홈타이`,
+      `${districtName} 스웨디시`,
+      `${cityName} 방문예약`,
+      "100% 후불제",
+      "케어나비"
+    ],
     openGraph: {
       title: finalTitle,
       description: finalDescription,
-      url: `https://carenavi.netlify.app/${city}/${district}`,
+      url: `${SITE_URL}/${city}/${district}`,
       locale: "ko_KR",
       type: "website",
     },
