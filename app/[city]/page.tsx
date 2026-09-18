@@ -42,90 +42,55 @@ const regionDetails: Record<string, { name: string; desc: string; districts: Rec
   }
 };
 
-// 🌟 대규모 SEO 조합 키워드 풀 (100개 수식어)
-const modifiers = [
-  '전문 힐링', '방문 릴렉스', '프라이빗 맞춤', '웰니스 바디', '케어 전신',
-  '스웨디시 감성', '아로마 오일', '홈케어 맞춤', '럭셔리 스파', 'VIP 프리미엄',
-  '안심 맞춤', '신속 방문', '소프트 릴렉싱', '딥티슈 바디', '커스텀 아로마',
-  '스페셜 힐링', '피로해소 전신', '맞춤형 스웨디시', '힐링 가이드', '실속형 바디',
-  '쾌적한 방문', '종합 웰니스', '최고급 감성', '프리미엄 홈케어', '전문 바디케어',
-  '맞춤 테라피', '럭셔리 힐링', '1:1 프라이빗', '정통 스웨디시', '스페셜 아로마',
-  '시원한', '편안한 릴렉스', '힐링 테라피스트', '전문 웰니스', '감성 스웨디시',
-  '프리미엄 바디', '맞춤형 힐링', '신속한 홈케어', '고품격', '럭셔리 릴렉스',
-  '프라이빗 힐링', '안심 방문', '전문 아로마', '스웨디시 테라피', '딥티슈 힐링',
-  '맞춤형 케어', '피로회복 바디', '웰니스 스파', '커스텀', 'VIP 릴렉스',
-  '스페셜 케어', '홈케어 힐링', '프리미엄 아로마', '정통 테라피', '감성',
-  '쾌적한 힐링', '종합 테라피', '최고급 바디', '전문 릴렉싱', '맞춤 스웨디시',
-  '럭셔리 테라피', '1:1 커스텀', '스웨디시 힐링', '아로마 릴렉스', '딥티슈',
-  '맞춤형 테라피', '피로해소 힐링', '웰니스 테라피', '커스텀 릴렉스', 'VIP',
-  '스페셜 테라피', '홈케어 바디', '프리미엄 테라피', '정통 힐링', '감성 릴렉스',
-  '쾌적한 테라피', '종합 바디', '최고급 테라피', '전문 힐링케어', '맞춤 바디케어',
-  '럭셔리', '프라이빗 테라피', '스웨디시', '아로마 테라피', '딥티슈 테라피',
-  '맞춤형', '피로회복 테라피', '웰니스', '커스텀 테라피', 'VIP 힐링',
-  '스페셜 바디', '홈케어 테라피', '프리미엄', '정통 바디', '감성 테라피',
-  '쾌적한', '종합 힐링', '최고급 릴렉스', '전문 커스텀', '맞춤 프리미엄'
+// 🌟 출장을 완전히 배제한 순수 마사지 수식어 풀 (간결하고 임팩트 있는 형태)
+const cityModifiers = [
+  '전문 힐링 마사지', '프라이빗 맞춤 마사지', '웰니스 바디 마사지', '스웨디시 감성 마사지',
+  '아로마 오일 마사지', '럭셔리 스파 마사지', 'VIP 프리미엄 마사지', '소프트 릴렉스 마사지',
+  '딥티슈 바디 마사지', '스페셜 힐링 마사지', '피로회복 전신 마사지', '맞춤형 스웨디시 마사지',
+  '실속형 바디 마사지', '종합 웰니스 마사지', '최고급 감성 마사지', '전문 바디케어 마사지',
+  '맞춤 테라피 마사지', '1:1 프라이빗 마사지', '정통 스웨디시 마사지', '스페셜 아로마 마사지',
+  '시원한 전신 마사지', '편안한 릴렉스 마사지', '고품격 테라피 마사지', '전문 아로마 마사지',
+  '스웨디시 테라피 마사지', '딥티슈 힐링 마사지', '웰니스 스파 마사지', '정통 바디 마사지',
+  '쾌적한 힐링 마사지', '종합 테라피 마사지', '최고급 바디 마사지', '전문 릴렉싱 마사지'
 ];
 
-// 🌟 대규모 서비스 종류 풀 (60개)
-const serviceTypes = [
-  '마사지', '힐링 마사지', '아로마 마사지', '스웨디시 마사지', '전신 마사지',
-  '바디 마사지', '맞춤 마사지', '프라이빗 마사지', '홈케어 마사지', '스파 마사지',
-  '감성 마사지', '정통 마사지', '커스텀 마사지', '안심 마사지', '프리미엄 마사지',
-  '릴렉싱 마사지', '웰니스 마사지', '딥티슈 마사지', 'VIP 마사지', '스페셜 마사지',
-  '실속형 마사지', '종합 마사지', '최고급 마사지', '전문 마사지', '방문 마사지',
-  '소프트 마사지', '오일 마사지', '케어 마사지', '토탈 마사지', '집중 마사지',
-  '릴렉스 마사지', '테라피 마사지', '바디케어 마사지', '맞춤형 마사지', '고품격 마사지',
-  '시원한 마사지', '피로회복 마사지', '근육이완 마사지', '밸런스 마사지', '활력 마사지',
-  '부드러운 마사지', '향기 마사지', '스마트 마사지', '디톡스 마사지', '리프레시 마사지',
-  '맞춤바디 마사지', '프라임 마사지', '로얄 마사지', '클래식 마사지', '시그니처 마사지',
-  '오리지널 마사지', '익스클루시브 마사지', '럭셔리 마사지', '하이엔드 마사지', '컴포트 마사지',
-  '스위트 마사지', '이지 마사지', '딥릴렉스 마사지', '밸류 마사지', '토탈바디 마사지'
-];
-
-// 🌟 대규모 설명 풀 (20개)
-const descriptions = [
-  '선입금 없는 100% 후불제 안전 시스템으로 편안한 휴식을 선사합니다.',
-  '검증된 전문 관리사와 함께 지친 피로를 안전하게 날려보세요.',
-  '품격 있는 1:1 커스텀 코스로 일상의 스트레스를 말끔히 해소해 드립니다.',
-  '정직한 정찰제와 신속한 방문 서비스로 안심하고 이용하실 수 있습니다.',
-  '향기로운 아로마와 부드러운 터치로 나만의 프라이빗한 힐링을 경험하세요.',
-  '이동의 불편함 없이 내 공간에서 누리는 럭셔리 힐링 타임.',
-  '숙련된 힐러들의 세심하고 정성스러운 손길로 묵은 피로를 풀어드립니다.',
-  '투명하고 정직한 요금 체계로 믿을 수 있는 프리미엄 방문 서비스를 제공합니다.',
-  '지친 몸과 마음에 활력을 불어넣어 주는 맞춤형 웰니스 솔루션.',
-  '철저한 위생 관리와 고객 만족 중심의 고품격 케어를 만나보세요.',
-  '빠르고 친절한 매칭 시스템으로 언제 어디서나 편안한 휴식을 누리세요.',
-  '깊은 근육까지 시원하게 이완시켜 주는 전문 바디케어 서비스.',
-  '일상에 지친 당신을 위한 단 하나의 안심 홈케어 힐링 프로그램.',
-  '체계적인 프로그램과 전문적인 터치로 최상의 만족도를 선사합니다.',
-  '편안하고 아늑한 분위기를 집에서 그대로 즐기는 프라이빗 테라피.',
-  '불편한 곳을 정확하게 짚어주는 맞춤형 케어로 가벼운 몸을 되찾으세요.',
-  '스트레스와 피로를 한 번에 날려버리는 프리미엄 방문 케어 솔루션.',
-  '엄선된 전문 관리사의 품격 있는 손길을 직접 경험해 보세요.',
-  '믿을 수 있는 안전한 후불 시스템으로 편안하게 즐기는 힐링.',
-  '지친 하루 끝에 찾아오는 완벽한 휴식과 안심 방문 서비스.'
+const cityDescriptions = [
+  '검증된 전문 샵 정보와 체계적인 프로그램으로 지친 피로를 풀어드립니다.',
+  '선입금 없는 안전한 시스템과 투명한 정찰제로 편안한 휴식을 선사합니다.',
+  '엄선된 전문 관리사의 섬세한 손길로 최상의 마사지 힐링을 누려보세요.',
+  '향기로운 아로마와 부드러운 터치로 나만의 프라이빗한 휴식을 선사합니다.',
+  '일상에 지친 몸과 마음에 활력을 불어넣어 주는 맞춤형 테라피 안내.'
 ];
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const resolvedParams = await params;
-  const region = regionDetails[resolvedParams.city] || regionDetails["seoul"];
+  const cityKey = resolvedParams.city || "seoul";
+  const region = regionDetails[cityKey] || regionDetails["seoul"];
 
-  // 🌟 해시 기반 고유 인덱스 추출 (수만 가지 조합 보장)
-  const seed = `${region.name}-carenavi-city-mix-v2`;
-  const charSum = seed.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  // 🌟 순차적 인덱스 계산 (출장 완전 배제, 고유성 보장)
+  const charSum = cityKey.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0);
   
-  const modIdx = charSum % modifiers.length;
-  const srvIdx = (charSum * 3) % serviceTypes.length;
-  const descIdx = (charSum * 7) % descriptions.length;
+  const modIdx = charSum % cityModifiers.length;
+  const descIdx = (charSum * 7) % cityDescriptions.length;
 
-  const finalTitle = `${region.name} ${modifiers[modIdx]} ${serviceTypes[srvIdx]}`;
-  const finalDescription = `${region.name} ${region.desc}. ${modifiers[modIdx]} ${serviceTypes[srvIdx]}. ${descriptions[descIdx]}`;
+  // 💡 사이트명과 샵 이름 배제, 짧고 간결한 순수 마사지 타이틀
+  const finalTitle = `${region.name} ${cityModifiers[modIdx]}`;
+  const finalDescription = `${region.name} 전지역 마사지 안내. ${cityDescriptions[descIdx]}`;
 
   return {
-    title: finalTitle,
+    title: {
+      absolute: finalTitle,
+    },
     description: finalDescription,
     alternates: {
-      canonical: `https://carenavi.netlify.app/${resolvedParams.city}/`,
+      canonical: `https://carenavi.netlify.app/${cityKey}/`,
+    },
+    openGraph: {
+      title: finalTitle,
+      description: finalDescription,
+      url: `https://carenavi.netlify.app/${cityKey}/`,
+      locale: "ko_KR",
+      type: "website",
     },
   };
 }
@@ -159,10 +124,10 @@ export default async function CityPage({ params }: PageProps) {
       <section className="max-w-6xl mx-auto py-10 px-4">
         <div className="mb-8">
           <span className="bg-sky-100 text-sky-700 text-xs font-semibold px-2.5 py-1 rounded-md mb-2 inline-block">
-            {region.name} 제휴 샵 안내
+            {region.name} 마사지 안내
           </span>
           <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 mb-2">
-            {region.name} 지역별 프리미엄 힐링 테라피
+            {region.name} 지역별 프리미엄 힐링 마사지
           </h1>
           <p className="text-slate-600 text-sm md:text-base">{region.desc}</p>
         </div>
@@ -173,7 +138,7 @@ export default async function CityPage({ params }: PageProps) {
               <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
                 <Link href={`/${cityKey}/${distKey}`} className="text-lg font-bold text-slate-900 hover:text-sky-600 transition flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-sky-600"></span>
-                  {distVal.name} 전체보기 &rarr;
+                  {distVal.name} 마사지 샵 전체보기 &rarr;
                 </Link>
                 <span className="text-xs text-slate-400">세부 동 안내</span>
               </div>
