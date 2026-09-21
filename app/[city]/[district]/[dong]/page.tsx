@@ -12,6 +12,41 @@ interface PageProps {
 
 const SITE_URL = "https://carenavi.netlify.app";
 
+// 🌟 경기도 시·군 영문 슬러그를 한글 이름으로 변환해주는 매핑 객체
+const gyeonggiNameMap: Record<string, string> = {
+  suwon: "수원시",
+  seongnam: "성남시",
+  uijeongbu: "의정부시",
+  anyang: "안양시",
+  bucheon: "부천시",
+  gwangmyeong: "광명시",
+  pyeongtaek: "평택시",
+  dongducheon: "동두천시",
+  ansan: "안산시",
+  goyang: "고양시",
+  gwacheon: "과천시",
+  guri: "구리시",
+  namyangju: "남양주시",
+  osan: "오산시",
+  siheung: "시흥시",
+  gunpo: "군포시",
+  uiwang: "의왕시",
+  hanam: "하남시",
+  yongin: "용인시",
+  paju: "파주시",
+  icheon: "이천시",
+  anseong: "안성시",
+  gimpo: "김포시",
+  hwaseong: "화성시",
+  gwangju: "광주시",
+  yangju: "양주시",
+  pocheon: "포천시",
+  yeoju: "여주시",
+  yeoncheon: "연천군",
+  gapyeong: "가평군",
+  yangpyeong: "양평군"
+};
+
 // 🌟 1단: '출장'을 배제한 수식어 풀 (35개)
 const prefixAdjectives = [
   "소프트", "프리미엄", "릴렉스", "감성", "프라이빗",
@@ -77,11 +112,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const districtInfo = region?.districts[district.toLowerCase()];
   
   const cityName = city.toLowerCase() === "seoul" ? "서울" : city.toLowerCase() === "incheon" ? "인천" : "경기";
-  const districtName = districtInfo ? districtInfo.name : district;
+  const rawDistrictName = districtInfo ? districtInfo.name : district;
+  
+  // 💡 경기도일 경우 영문 슬러그를 한글 시·군 이름으로 치환
+  const districtName = city.toLowerCase() === "gyeonggi"
+    ? (gyeonggiNameMap[district.toLowerCase()] || rawDistrictName)
+    : rawDistrictName;
+
   const decodedDong = decodeURIComponent(dong);
   const locationKeyword = `${cityName} ${districtName} ${decodedDong}`;
 
-  // 🌟 순차적 인덱스 계산 (출장/안마 배제, 35x16x50 고유 조합 보장)
   const seed = `${locationKeyword}-carenavi-dong-clean-v3`;
   const charSum = seed.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0);
   
@@ -97,10 +137,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const selectedTertiary = tertiaryActionPatterns[tertiaryIdx];
   const selectedPriceHook = priceHooks[priceIdx];
 
-  // 💡 [동] [수식어] [코스] 마사지·홈타이 | [구] [2단 예약] | [3단 소구점] (약 45~50자)
   const finalTitle = `${decodedDong} ${selectedAdj} ${selectedTech} 마사지·홈타이 | ${districtName} ${selectedAction} | ${selectedTertiary}`;
-  
-  // 💡 [시 구 동] 전지역 전문 방문 케어. 엄선된 테라피스트 100% 후불제 마사지·홈타이 안내. [가격 훅]
   const finalDescription = `${locationKeyword} 전지역 전문 방문 케어. 엄선된 테라피스트 100% 후불제 마사지·홈타이 안내. ${selectedPriceHook}`;
 
   return {
@@ -137,17 +174,26 @@ export default async function DongPage({ params }: PageProps) {
   const cityName = city.toLowerCase() === "seoul" ? "서울" : city.toLowerCase() === "incheon" ? "인천" : "경기";
   const region = regionData[city.toLowerCase()];
   const districtInfo = region?.districts[district.toLowerCase()];
-  const districtName = districtInfo ? districtInfo.name : district;
+  
+  const rawDistrictName = districtInfo ? districtInfo.name : district;
+  const districtName = city.toLowerCase() === "gyeonggi"
+    ? (gyeonggiNameMap[district.toLowerCase()] || rawDistrictName)
+    : rawDistrictName;
+
   const decodedDong = decodeURIComponent(dong);
   const fullTitle = `${cityName} ${districtName} ${decodedDong}`;
 
-  const shops = [
+  // 💡 기본 샵 목록
+  const baseShops = [
     { id: 1, name: `골든테라피`, desc: "고품격 릴렉싱 & 딥티슈 피로회복! 전문 테라피스트의 품격 있는 1:1 맞춤 마사지 케어", phone: "0507-1280-3361", price: "맞춤 코스별 상이", image: "/shop1.jpg" },
     { id: 2, name: `미인테라피`, desc: "최고급 천연 오일을 활용한 감성 아로마 전신 바디마사지 프로그램", phone: "0507-1280-3303", price: "맞춤 코스별 상이", image: "/shop2.jpg" },
     { id: 3, name: `주주테라피`, desc: "재방문율 높은 만족도! 철저한 위생 관리와 프라이빗 힐링 바디마사지 서비스 제공", phone: "0507-1280-3193", price: "맞춤 코스별 상이", image: "/shop3.jpg" },
     { id: 4, name: `퀸즈테라피`, desc: "품격 있게 누리는 케어! 전문 힐러들의 체형 맞춤형 피로회복 특화 마사지 프로그램", phone: "0507-1280-3334", price: "맞춤 코스별 상이", image: "/shop4.jpg" },
     { id: 5, name: `오늘밤테라피`, desc: "엄선된 우수 제휴점! 수도권 전지역 쾌적하고 편안한 힐링 마사지", phone: "0507-1280-3223", price: "맞춤 코스별 상이", image: "/shop5.jpg" }
   ];
+
+  // 💡 새로고침할 때마다 순서가 랜덤하게 섞이도록 셔플 로직 적용 (Server-side rendering 시점마다 적용)
+  const shops = [...baseShops].sort(() => Math.random() - 0.5);
 
   return (
     <div className="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans selection:bg-sky-500 selection:text-white">
