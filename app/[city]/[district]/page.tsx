@@ -11,6 +11,41 @@ interface PageProps {
 
 const SITE_URL = "https://carenavi.netlify.app";
 
+// 🌟 경기도 시·군 영문 슬러그를 완벽한 한글 이름으로 변환해주는 전용 맵핑 객체
+const gyeonggiNameMap: Record<string, string> = {
+  suwon: "수원시",
+  seongnam: "성남시",
+  uijeongbu: "의정부시",
+  anyang: "안양시",
+  bucheon: "부천시",
+  gwangmyeong: "광명시",
+  pyeongtaek: "평택시",
+  dongducheon: "동두천시",
+  ansan: "안산시",
+  goyang: "고양시",
+  gwacheon: "과천시",
+  guri: "구리시",
+  namyangju: "남양주시",
+  osan: "오산시",
+  siheung: "시흥시",
+  gunpo: "군포시",
+  uiwang: "의왕시",
+  hanam: "하남시",
+  yongin: "용인시",
+  paju: "파주시",
+  icheon: "이천시",
+  anseong: "안성시",
+  gimpo: "김포시",
+  hwaseong: "화성시",
+  gwangju: "광주시",
+  yangju: "양주시",
+  pocheon: "포천시",
+  yeoju: "여주시",
+  yeoncheon: "연천군",
+  gapyeong: "가평군",
+  yangpyeong: "양평군"
+};
+
 // 🌟 1단: '출장'을 배제한 수식어 풀 (35개)
 const prefixAdjectives = [
   "소프트", "프리미엄", "릴렉스", "감성", "프라이빗",
@@ -76,10 +111,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const districtInfo = region?.districts[district.toLowerCase()];
   
   const cityName = city.toLowerCase() === "seoul" ? "서울" : city.toLowerCase() === "incheon" ? "인천" : "경기";
-  const districtName = districtInfo ? districtInfo.name : district;
+  
+  // 💡 경기도 지역일 경우 gyeonggiNameMap에서 우선 찾고, 없으면 districtInfo.name 또는 원본 district 출력
+  const districtName = city.toLowerCase() === "gyeonggi" 
+    ? (gyeonggiNameMap[district.toLowerCase()] || districtInfo?.name || district)
+    : (districtInfo?.name || district);
+
   const locationKeyword = `${cityName} ${districtName}`;
 
-  // 🌟 순차적 인덱스 계산 (출장/안마 배제, 35x16x50 고유 조합 보장)
   const seed = `${locationKeyword}-carenavi-district-clean-v3`;
   const charSum = seed.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0);
   
@@ -95,10 +134,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const selectedTertiary = tertiaryActionPatterns[tertiaryIdx];
   const selectedPriceHook = priceHooks[priceIdx];
 
-  // 💡 [구] [수식어] [코스] 마사지·홈타이 | [시] [2단 예약] | [3단 소구점] (약 45~50자)
   const finalTitle = `${districtName} ${selectedAdj} ${selectedTech} 마사지·홈타이 | ${cityName} ${selectedAction} | ${selectedTertiary}`;
-  
-  // 💡 [시 구] 전지역 전문 방문 케어. 엄선된 테라피스트 100% 후불제 마사지·홈타이 안내. [가격 훅]
   const finalDescription = `${locationKeyword} 전지역 전문 방문 케어. 엄선된 테라피스트 100% 후불제 마사지·홈타이 안내. ${selectedPriceHook}`;
 
   return {
@@ -135,7 +171,12 @@ export default async function DistrictPage({ params }: PageProps) {
   const cityName = city.toLowerCase() === "seoul" ? "서울" : city.toLowerCase() === "incheon" ? "인천" : "경기";
   const region = regionData[city.toLowerCase()];
   const districtInfo = region?.districts[district.toLowerCase()];
-  const districtName = districtInfo ? districtInfo.name : district;
+  
+  // 💡 본문 렌더링에서도 동일하게 경기도 지역 한글 이름 매핑 적용
+  const districtName = city.toLowerCase() === "gyeonggi" 
+    ? (gyeonggiNameMap[district.toLowerCase()] || districtInfo?.name || district)
+    : (districtInfo?.name || district);
+
   const fullTitle = `${cityName} ${districtName}`;
 
   const shops = [
@@ -186,7 +227,7 @@ export default async function DistrictPage({ params }: PageProps) {
           </section>
         )}
 
-        {/* 구 단위 추천 제휴 샵 리스트 */}
+        {/* 구/시 단위 추천 제휴 샵 리스트 */}
         <section className="space-y-6">
           <div className="text-center">
             <p className="text-xs text-sky-600 font-bold tracking-widest uppercase">RECOMMENDED PARTNERS</p>
